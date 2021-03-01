@@ -46,6 +46,7 @@ const connection = async () => {
     }
 }
 
+
 connection();
 
 module.exports = db;

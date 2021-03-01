@@ -6,6 +6,8 @@ services:
     command: sh -c "npm install && npm start"
     ports:
       - 5000:5000
+    depends_on:
+      - mysql
     working_dir: /hm/api
     volumes:
       - type: bind
@@ -21,6 +23,8 @@ services:
     command: sh -c "npm install && npm start"
     ports:
       - 3000:3000
+    depends_on:
+      - api
     links:
       - api
     working_dir: /hm/client

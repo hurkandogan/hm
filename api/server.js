@@ -15,7 +15,7 @@ const app = express();
 app.use(cors());
 
 // Static Files
-app.use(express.static(path.join(__dirname, 'build')));
+//app.use(express.static(path.join(__dirname, 'build')));
 
 app.use(body.urlencoded({extended: true}));
 app.use(body.json());
