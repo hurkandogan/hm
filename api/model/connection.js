@@ -12,7 +12,15 @@ const sequelize = new Sequelize(dbName, dbUser, dbPass, {
     host: dbHost,
     dialect: dbDial,
     port: dbPort,
-    logging: (msg) => console.log
+    logging: (msg) => console.log,
+    
+    // TODO: Put values into the env values!
+    pool: {
+        max: 5,
+        min: 1,
+        acquire: 30000,
+        idle: 10000
+    }
 });
 
 const db = {};
@@ -45,7 +53,6 @@ const connection = async () => {
         console.log(error);
     }
 }
-
 
 connection();
 
