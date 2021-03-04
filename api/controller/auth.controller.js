@@ -42,13 +42,21 @@ exports.signin = (req, res) => {
                 return res.status(404).send({ message: "User is not found!" });
             }
 
-            let passwordIsValid = bcrypt.compareSync(req.body.data.password, user.password);
+            let passwordIsValid = bcrypt.compareSync(
+                req.body.data.password,
+                user.password
+            );
             
             if (!passwordIsValid) {
-                return res.status(404).send({ accessToken: null, message: "Invalid Password!" });
+                return res.status(401).send({
+                    accessToken: null,
+                    message: "Invalid Password!"
+                });
             }
 
-            let token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: 86400 });
+            let token = jwt.sign({ id: user.id },
+                process.env.JWT_SECRET,
+                { expiresIn: 86400 });
             
             return res.status(200).send({
                 id: user.id,

@@ -7,6 +7,10 @@ const dbPass = process.env.DB_PASSWORD;
 const dbHost = process.env.DB_HOST;
 const dbDial = process.env.DIALECT;
 const dbPort = process.env.DB_PORT;
+const dbPoolMax = parseInt(process.env.POOL_MAX);
+const dbPoolMin = parseInt(process.env.POOL_MIN);
+const dbPoolAcquire = parseInt(process.env.POOL_ACQUIRE);
+const dbPoolIdle = parseInt(process.env.POOL_IDLE);
 
 const sequelize = new Sequelize(dbName, dbUser, dbPass, {
     host: dbHost,
@@ -14,12 +18,11 @@ const sequelize = new Sequelize(dbName, dbUser, dbPass, {
     port: dbPort,
     logging: (msg) => console.log,
     
-    // TODO: Put values into the env values!
     pool: {
-        max: 5,
-        min: 1,
-        acquire: 30000,
-        idle: 10000
+        max: dbPoolMax,
+        min: dbPoolMin,
+        acquire: dbPoolAcquire,
+        idle: dbPoolIdle
     }
 });
 

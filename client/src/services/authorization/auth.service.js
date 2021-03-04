@@ -1,4 +1,4 @@
-import common_http from './common_http';
+import common_http from '../common_http';
 
 const register = (username, email, password) => {
   return common_http.post( "/api/signup", {
