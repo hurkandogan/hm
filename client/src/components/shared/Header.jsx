@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import AuthService from '../../services/auth.service';
+import AuthService from '../../services/authorization/auth.service';
 import Greeting from '../misc/Greeting';
 
 const useStyles = makeStyles((theme) => ({

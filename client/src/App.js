@@ -10,7 +10,7 @@ import Dashboard from "./components/Dashboard";
 import { makeStyles } from '@material-ui/core/styles';
 
 //Services
-import AuthService from './services/auth.service';
+import AuthService from './services/authorization/auth.service';
 
 const useStyles = makeStyles((theme) => ({
     root: {
