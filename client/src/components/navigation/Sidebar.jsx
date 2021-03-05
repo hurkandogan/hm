@@ -55,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Sidebar() {
+
     const classes = useStyles();
     const theme = useTheme();
     const [objectsList, setObject] = useState([]);

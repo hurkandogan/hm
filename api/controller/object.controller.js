@@ -2,6 +2,7 @@ const db = require('../model/connection');
 const Object = db.objects;
 
 exports.getAllObjects = (req, res) => {
+    console.log(req.headers);
     Object.findAll()
         .then( data => res.status(200).send(data))
         .catch(err => {
