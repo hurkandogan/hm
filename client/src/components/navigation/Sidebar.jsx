@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
 import InsertInvoiceModal from '../forms/InsertInvoiceModal';
 import findAllObjects from '../../services/object.service.js';
 import Divider from '@material-ui/core/Divider';
@@ -13,7 +14,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
 
 const drawerWidth = 280;
 
@@ -80,7 +80,7 @@ function Sidebar() {
 
     const loadObjects = (data) => {
         return (
-            <NavLink key={data.id} to={'/#/invoices/' + data.id} className={classes.link}>
+            <NavLink key={data.id} to={'/invoices/' + data.id} className={classes.link}>
                 <ListItem button>
                     <ListItemIcon><ApartmentRoundedIcon /></ListItemIcon>
                     <ListItemText primary={data.name} />
@@ -101,7 +101,7 @@ function Sidebar() {
                     <ListItemText primary={'hugOS'} /><small>Version: 0.0.0</small>
                 </ListItem>
                 <Divider />
-                <NavLink to={'/#/'}>
+                <NavLink to={'/'} className={classes.link}>
                     <ListItem button>
                         <ListItemIcon><HomeRoundedIcon /></ListItemIcon>
                         <ListItemText primary={'Home'} style={{ fontSize: '14px' }} />

@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
-import Checkbox from '@material-ui/core/Checkbox';
+// import Checkbox from '@material-ui/core/Checkbox';
 import InputLabel from '@material-ui/core/InputLabel';
 import { makeStyles } from '@material-ui/core/styles';
 import InvoiceService from '../../services/invoice.service';
@@ -67,7 +65,6 @@ function InsertInvoiceForm() {
     };
 
     const saveInvoice = () => {
-
         InvoiceService.insertInvoice(formData)
             .then(response => console.log(response))
             .catch(err => console.log("Invoice is not created! " + err));
@@ -84,7 +81,7 @@ function InsertInvoiceForm() {
                     name="date"
                     label="Invoice Date"
                     type="date"
-                    defaultValue="YYYY-DD-MM"
+                    defaultValue="yyy-MM-dd"
                     onChange={changeHandler}
                     InputLabelProps={{
                         shrink: true,
@@ -120,7 +117,7 @@ function InsertInvoiceForm() {
                     onChange={changeHandler}
                 >
                     <MenuItem disabled key={0} value={''}>Choose the Cost Type</MenuItem>
-                    <MenuItem value="643f5cb0-792f-11eb-a99c-f3343616cad9">General (Only: Verwaltungskosten, Carls Aufw. und Praxis)</MenuItem>
+                    <MenuItem value="086dabd0-7d21-11eb-8d22-c509cb1665f9">General (Only: Verwaltungskosten, Carls Aufw. und Praxis)</MenuItem>
                     {/* <MenuItem value="28e5a600-5040-11eb-b5b3-0ddba2819351">Erhaltungsaufwendungen</MenuItem>
                     <MenuItem value="2d7d2f80-5040-11eb-b5b3-0ddba2819351">Nebenkosten</MenuItem>
                     <MenuItem value="3361ab60-5040-11eb-b5b3-0ddba2819351">Weitere Aufwendungen</MenuItem>
@@ -140,10 +137,10 @@ function InsertInvoiceForm() {
             <FormControl className={classes.formControl}>
                 <TextField id="invoiceLink" name="invoiceLink" label="Invoice Link" onChange={changeHandler} />
             </FormControl>
-            <FormControl className={classes.formControl}>
+            {/* <FormControl className={classes.formControl}>
                 Payment: <Checkbox onChange={changeHandler} name="payment" id="payment" />
-            </FormControl>
-            <Button variant="contained" color="primary" onClick={saveInvoice}>Submit</Button>
+            </FormControl> */}
+            <Button variant="contained" color="primary" type="submit" onClick={saveInvoice}>Submit</Button>
         </div>
     );
 }

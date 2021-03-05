@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Switch, HashRouter } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 // Components
 import Header from './components/shared/Header';
@@ -36,7 +36,7 @@ function App() {
     const loginSubmit = async (data) => {
         try {
             await AuthService.login(data);
-            //user = await AuthService.getCurrentUser();
+
         } catch (err) {
             console.log(err);
         }
@@ -54,8 +54,8 @@ function App() {
                 <main className={classes.content}>
                 <div className={classes.toolbar}>
                     <Switch>
-                        <HashRouter exact path={'/'} component={Dashboard} />
-                        <HashRouter exact path={'/invoices/:objectId'} component={InvoiceTable} />
+                        <Route exact path={'/'} component={Dashboard} />
+                        <Route exact path={'/invoices/:objectId'} component={InvoiceTable} />
                     </Switch>
                 </div>
              </main>
