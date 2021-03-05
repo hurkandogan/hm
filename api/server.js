@@ -24,19 +24,12 @@ if (env == 'prod') {
 app.use(body.urlencoded({extended: true}));
 app.use(body.json());
 
-// Login
+// Routes
 require("./routes/auth")(app);
+require("./routes/index")(app);
 require('./routes/objects')(app);
-
-const indexRouter = require("./routes/index");
-const invoicesRouter = require("./routes/invoices");
-const costTypesRouter = require("./routes/costTypes");
-
-app.use("/api/dashboard", indexRouter);
-//app.use("/api/objects", objectsRouter);
-
-app.use("/api/invoices", invoicesRouter);
-app.use("/api/costTypes", costTypesRouter);
+require("./routes/invoices")(app);
+require("./routes/costTypes")(app);
 
 
 app.listen(PORT, function() {

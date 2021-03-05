@@ -2,9 +2,16 @@ const express = require('express');
 const router = express.Router();
 const Invoice = require('../controller/invoice.controller');
 
-router.get('/', Invoice.getAllInvoices);
-router.get('/:objectID', Invoice.getObjectInvoices);
-router.post('/', Invoice.createInvoice);
-router.delete('/delete/:id', Invoice.deleteInvoice);
-
-module.exports = router;
+module.exports = function (app) {
+    app.use(function (req, res, next) {
+        res.header(
+            "Access-Control-Allow-Headers",
+            "x-access-token, Origin, Content-Type, Accept"
+        );
+        next();
+    });
+    app.get('/api/invoices', Invoice.getAllInvoices);
+    app.get('/api/invoices/:objectID', Invoice.getObjectInvoices);
+    app.post('/api/invoices', Invoice.createInvoice);
+    app.delete('/api/invoices/delete/:id', Invoice.deleteInvoice);
+};

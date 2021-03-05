@@ -11,10 +11,9 @@ module.exports = function (app) {
         next();
     });
 
-app.get('/api/objects', Object.getAllObjects);
-app.get('/api/objects/:id', Object.getSingleObject); // Not yet implemented
-app.post('/api/objects/', Object.createObject);
-app.patch('/api/objects/update/:id', Object.updateObject); // Not yet implemented
-app.delete('/api/objects/delete/:id', Object.deleteObject);
-
+    app.get('/api/objects', Object.getAllObjects);
+    app.get('/api/objects/:id', Object.getSingleObject); // Not yet implemented
+    app.post('/api/objects/', Object.createObject);
+    app.patch('/api/objects/update/:id', Object.updateObject); // Not yet implemented
+    app.delete('/api/objects/delete/:id', Object.deleteObject);
 };

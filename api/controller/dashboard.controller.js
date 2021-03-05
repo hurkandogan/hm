@@ -19,6 +19,6 @@ exports.getAllTotals = (req, res) => {
     })
         .then(data => res.status(200).send(data))
         .catch(err => {
-            res.status(500).send({ message : "Couldn't fetch data! " + err });
+            res.status(500).send({ message : "dashboard.controller#getAllTotals: Couldn't fetch data! " + err });
             });
 };
