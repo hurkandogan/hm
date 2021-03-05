@@ -11,7 +11,6 @@ const register = (username, email, password) => {
 const login = (data) => {
     return common_http.post("/api/signin", { data })
         .then((response) => {
-            console.log("Works" + response);
             if (response.data.accessToken) {
                 localStorage.setItem("user", JSON.stringify(response.data));
             }

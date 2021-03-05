@@ -1,9 +1,9 @@
-const db = require("../models");
+const db = require("../model/connection");
 const User = db.users;
 const jwt = require("jsonwebtoken");
 const process = require("process");
 
-verifyToken = (req, res, next) => {
+const verifyToken = (req, res, next) => {
   let token = req.headers["x-access-token"];
 
   if (!token) {
@@ -23,25 +23,4 @@ verifyToken = (req, res, next) => {
   });
 };
 
-isUser = (req, res, next) => {
-  User.findByPk(req.userId).then(user => {
-    user.getRole().then(role => {
-      if (role.name === "user") {
-        next();
-        return;
-      }
-      res.status(403).send({
-        message: "Require User Role!"
-      });
-    });
-  });
-};
-
-const authJwt = {
-  verifyToken: verifyToken,
-  isAdmin: isAdmin,
-  isAuthor: isAuthor,
-  isUser: isUser,
-};
-
-module.exports = authJwt;
+module.exports = verifyToken;

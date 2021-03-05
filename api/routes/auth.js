@@ -10,5 +10,6 @@ module.exports = (app) => {
     });
 
     app.post('/api/signin', authController.signin);
+    // TODO: Only signed in admin users can sign up new users!
     app.post('/api/signup', authController.signup);
 }

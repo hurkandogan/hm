@@ -2,9 +2,11 @@ const db = require('../model/connection');
 const Object = db.objects;
 
 exports.getAllObjects = (req, res) => {
-    console.log(req.headers);
+    console.log(req.userId);
     Object.findAll()
-        .then( data => res.status(200).send(data))
+        .then(data => {
+            res.status(200).send(data)
+        })
         .catch(err => {
             res.status(500).send({
                 message: "object.controller#getAllObjects: " + err

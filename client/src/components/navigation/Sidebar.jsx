@@ -13,12 +13,16 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import Link from '@material-ui/core/Link';
 
-const drawerWidth = 240;
+const drawerWidth = 280;
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
+    },
+    listContainer: {
+        maxWidth: '100%',
     },
     drawer: {
         [theme.breakpoints.up('sm')]: {
@@ -97,18 +101,18 @@ function Sidebar() {
                     <ListItemText primary={'hugOS'} /><small>Version: 0.0.0</small>
                 </ListItem>
                 <Divider />
-                <NavLink to={'/#/'} className={classes.link}>
+                <NavLink to={'/#/'}>
                     <ListItem button>
                         <ListItemIcon><HomeRoundedIcon /></ListItemIcon>
                         <ListItemText primary={'Home'} style={{ fontSize: '14px' }} />
                     </ListItem>
                 </NavLink>
-                <button onClick={insertInvoicePopupHandler}>
+                <Link onClick={insertInvoicePopupHandler}>
                     <ListItem button>
                         <ListItemIcon><AddBoxRoundedIcon /></ListItemIcon>
                         <ListItemText primary={'Insert Invoice'} />
                     </ListItem>
-                </button>
+                </Link>
                 <Divider />
                 {objectsList.map((data) => loadObjects(data))}
                 <Divider />
