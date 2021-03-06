@@ -17,8 +17,7 @@ app.use(cors());
 const devEnv = process.env.NODE_ENV;
 if (devEnv == 'prod') {
     const path = require('path');
-    // TODO: Path is not correct! After react-build should be changed
-    app.use(express.static(path.join(__dirname, 'build')));
+    app.use(express.static(path.join(__dirname, 'client/build')));
 }
 
 app.use(body.urlencoded({extended: true}));
