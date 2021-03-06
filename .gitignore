@@ -1,6 +1,6 @@
 # dependencies
+node_modules
 client/node_modules
-api/node_modules
 client/.pnp
 client/.pnp.js
 
@@ -25,3 +25,4 @@ client/yarn-error.log*
 
 # env
 api/.env
+node_modules

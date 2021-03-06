@@ -14,8 +14,8 @@ const app = express();
 app.use(cors());
 
 // Static Files
-const env = process.env.NODE_ENV;
-if (env == 'prod') {
+const devEnv = process.env.NODE_ENV;
+if (devEnv == 'prod') {
     const path = require('path');
     // TODO: Path is not correct! After react-build should be changed
     app.use(express.static(path.join(__dirname, 'build')));
@@ -25,11 +25,11 @@ app.use(body.urlencoded({extended: true}));
 app.use(body.json());
 
 // Routes
-require("./routes/auth")(app);
-require("./routes/index")(app);
-require('./routes/objects')(app);
-require("./routes/invoices")(app);
-require("./routes/costTypes")(app);
+require("./api/routes/auth")(app);
+require("./api/routes/index")(app);
+require('./api/routes/objects')(app);
+require("./api/routes/invoices")(app);
+require("./api/routes/costTypes")(app);
 
 
 app.listen(PORT, function() {
