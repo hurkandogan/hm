@@ -26,8 +26,8 @@ exports.getObjectInvoices = (req, res) => {
         attributes: [
             'id',
             'name',
-            'objectType',
-            [Sequelize.fn('count', Sequelize.col('id')), 'total_row']
+            'objectType'
+            //[Sequelize.fn('SUM', Sequelize.col('Invoice.total')), 'totals']
         ],
         include: [
             {
