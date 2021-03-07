@@ -1,3 +1,5 @@
+const Sequelize = require('sequelize');
+const { sequelize } = require('../model/connection');
 const db = require('../model/connection');
 const Invoice = db.invoices;
 const Object = db.objects;
@@ -17,11 +19,37 @@ exports.getAllInvoices = (req, res) => {
 };
 exports.getObjectInvoices = (req, res) => {
     const objectId = req.params.objectID;
-    Invoice.findAll({
+    Object.findAll({
         where: {
-        objectId: objectId
-    },
-        include: [ Object, CostType ]
+            id: objectId
+        },
+        attributes: [
+            'id',
+            'name',
+            'objectType',
+            [Sequelize.fn('count', Sequelize.col('id')), 'total_row']
+        ],
+        include: [
+            {
+                model: Invoice,
+                attributes: [
+                    'id',
+                    'date',
+                    'firm',
+                    'description',
+                    'total',
+                    'payment',
+                    'invoiceLink',
+                ],
+                include: {
+                model: CostType,
+                attributes: [
+                    'name',
+                    'objectType'
+                ]
+            }
+            }
+        ],
     })
         .then( data => {
             res.status(200).send(data)

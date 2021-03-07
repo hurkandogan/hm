@@ -1,5 +1,6 @@
-const {DataTypes} = require('sequelize');
-const Sequelize = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
+const Object = require('./object.model');
+const CostType = require('./costTypes.model');
 
 module.exports = (sequelize) => {
     return sequelize.define('invoice',{
@@ -11,11 +12,19 @@ module.exports = (sequelize) => {
         },
         objectId: {
             type: DataTypes.UUID,
-            allowNull: false
+            allowNull: false,
+            references: {
+                model: Object,
+                key: 'id'
+            }
         },
         costTypeId: {
             type: DataTypes.UUID,
-            allowNull: false
+            allowNull: false,
+            references: {
+                model: CostType,
+                key: 'id'
+            }
         },
         date: {
             type: DataTypes.DATE,

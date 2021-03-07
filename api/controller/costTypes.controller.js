@@ -29,7 +29,13 @@ exports.createCostTypes = (req, res) => {
 
 // Query
 exports.getAllCostTypes = (req, res) => {
-    CostType.findAll()
+    CostType.findAll({
+        attributes: [
+            'id',
+            'name',
+            'objectType'
+        ]
+    })
         .then( data => {
             res.status(200).send(data)
         })

@@ -16,7 +16,7 @@ const sequelize = new Sequelize(dbName, dbUser, dbPass, {
     host: dbHost,
     dialect: dbDial,
     port: dbPort,
-    logging: (msg) => console.log,
+    logging: (...msg) => console.log(msg),
     
     pool: {
         max: dbPoolMax,
@@ -45,6 +45,10 @@ db.invoices.belongsTo(db.costTypes, { foreignKey: 'costTypeId' });
 
 //db.roles.hasMany(db.users, { as: "users"});
 
+// TODO: db object is not used. There need a better implementation of models
+// TODO: with model classes and Promise objects.
+
+// Connection Test
 const connection = async () => {
     try {
         await sequelize.authenticate();

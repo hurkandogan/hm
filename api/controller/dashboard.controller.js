@@ -15,7 +15,7 @@ exports.getAllTotals = (req, res) => {
             'total',
             [sequelize.fn('sum', sequelize.col('total')), 'total_amount']
         ],
-        group: ['objectId'],
+        group: ['objectId', 'costTypeId', 'id'],
     })
         .then(data => res.status(200).send(data))
         .catch(err => {

@@ -2,7 +2,14 @@ const db = require('../model/connection');
 const Object = db.objects;
 
 exports.getAllObjects = (req, res) => {
-    Object.findAll()
+    Object.findAll({
+        attributes: [
+            'id',
+            'name',
+            'adresse',
+            'objectType'
+        ]
+    })
         .then(data => {
             res.status(200).send(data)
         })
