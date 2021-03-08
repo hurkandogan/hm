@@ -26,7 +26,9 @@ function InvoiceTable(props) {
     const { objectId } = useParams();
     const [invoices, setInvoices] = useState([]);
     const [costTypes, setCostTypes] = useState([]);
-    const [tabValue, setTabValue] = React.useState(0);
+    const [tabValue, setTabValue] = useState(0);
+    const [objectTotal, setObjectTotal] = useState(0);
+    const [objectName, setObjectName] = useState('');
 
     const classes = useStyles();
 
@@ -43,7 +45,12 @@ function InvoiceTable(props) {
 
     const retrieveInvoices = () => {
         InvoiceService.findInvoices(objectId)
-            .then(response => setInvoices(response.data))
+            .then(response => response.data)
+            .then(data => {
+                setInvoices(data[0].invoices);
+                setObjectName(data[0].name);
+                setObjectTotal(data[0].object_total);
+            })
             .catch(err => console.log(err))
     };
 
@@ -55,6 +62,7 @@ function InvoiceTable(props) {
         }
         return costTypesTabTitle;
     };
+
     const loadTabContents = () => {
         const costTypesCount = costTypes.length;
         const costTypesTabContent = [];
@@ -70,14 +78,15 @@ function InvoiceTable(props) {
 
     return (
         <div className={classes.root}>
+            <h1>{objectName}</h1>
+            <h3>{objectTotal ? 'Total: ' + objectTotal + '€' : ''}</h3>
             <AppBar position="static">
                 <Tabs value={tabValue} onChange={handleChange} aria-label="simple tabs example">
                     {loadTabs()}
                 </Tabs>
             </AppBar>
-            { loadTabContents()}
+            {loadTabContents()}
         </div>
-
     );
 }
 export default InvoiceTable;

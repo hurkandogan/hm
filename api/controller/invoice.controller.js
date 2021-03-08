@@ -26,7 +26,7 @@ exports.getObjectInvoices = (req, res) => {
         attributes: [
             'id',
             'name',
-            'objectType'
+            'objectType',
             [Sequelize.fn('SUM', Sequelize.col('invoices.total')), 'object_total']
         ],
         include: [
@@ -34,6 +34,8 @@ exports.getObjectInvoices = (req, res) => {
                 model: Invoice,
                 attributes: [
                     'id',
+                    'objectId',
+                    'costTypeId',
                     'date',
                     'firm',
                     'description',
@@ -43,14 +45,15 @@ exports.getObjectInvoices = (req, res) => {
                 ],
                 include: {
                 model: CostType,
-                attributes: [
-                    'name',
-                    'objectType'
+                    attributes: [
+                        'id',
+                        'name',
+                        'objectType'
                 ]
-            }
+                },
             }
         ],
-        group: 'id'
+        group: ['invoices.objectId']
     })
         .then( data => {
             res.status(200).send(data)

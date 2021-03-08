@@ -16,7 +16,7 @@ const sequelize = new Sequelize(dbName, dbUser, dbPass, {
     host: dbHost,
     dialect: dbDial,
     port: dbPort,
-    logging: (...msg) => console.log(msg),
+    logging: (...msg) => console.log(),
     
     pool: {
         max: dbPoolMax,

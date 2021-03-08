@@ -2,6 +2,7 @@ const express = require('express');
 const body = require('body-parser');
 const cors = require('cors');
 const process = require('process');
+const session = require('express-session');
 require('dotenv').config();
 
 // Port
@@ -12,6 +13,9 @@ const app = express();
 
 // Cors
 app.use(cors());
+
+// Session
+app.use(session);
 
 // Static Files
 const environment = process.env.NODE_ENV;

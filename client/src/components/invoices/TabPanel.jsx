@@ -26,11 +26,12 @@ function TabPanel(props) {
     }, [props.invoices]
     );
 
-    const fillInvoices = (data) => {
+    const fillInvoices = () => {
         setInvoices(props.invoices);
     };
 
     const iterateAndFilterInvoices = (data) => {
+        // TODO:  This part is wrong. It should be filtered with React reduce() or filter()
         if (data.costTypeId === props.panelCostType) {
             return <Invoice key={data.id} invoice={data} />
         }

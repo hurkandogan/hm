@@ -1,7 +1,6 @@
 import common_http from './common_http';
 
 const findInvoices = (objectId) => {
-    console.log(objectId);
     return common_http.get("/api/invoices/" + objectId);
 }
 
