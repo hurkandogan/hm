@@ -27,7 +27,7 @@ exports.getObjectInvoices = (req, res) => {
             'id',
             'name',
             'objectType'
-            //[Sequelize.fn('SUM', Sequelize.col('Invoice.total')), 'totals']
+            [Sequelize.fn('SUM', Sequelize.col('invoices.total')), 'object_total']
         ],
         include: [
             {
@@ -50,6 +50,7 @@ exports.getObjectInvoices = (req, res) => {
             }
             }
         ],
+        group: 'id'
     })
         .then( data => {
             res.status(200).send(data)
