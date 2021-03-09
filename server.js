@@ -15,7 +15,9 @@ const app = express();
 app.use(cors());
 
 // Session
-app.use(session);
+app.use(session({
+    secret: process.env.SESSION_SECRET
+}));
 
 // Static Files
 const environment = process.env.NODE_ENV;
