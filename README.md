@@ -6,6 +6,7 @@
 <p><strong>Backend: </strong>Node.js & Express</p>
 <p><strong>Database: </strong>MySQL</p>
 <p><strong>FrontEnd: </strong>React with MaterialUI</p>
+<p><small>Frontend environment is created only for API Visual testing. Will be improved soon.</small></p>
 <p><strong>Dev Env.: </strong>Docker</p>
 
 All feedbacks are welcome.
