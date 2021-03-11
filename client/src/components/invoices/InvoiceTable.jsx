@@ -49,7 +49,7 @@ function InvoiceTable(props) {
             .then(data => {
                 setInvoices(data[0].invoices);
                 setObjectName(data[0].name);
-                setObjectTotal(data[0].object_total);
+                setObjectTotal(data[0].totals);
             })
             .catch(err => console.log(err))
     };
