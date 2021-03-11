@@ -12,7 +12,7 @@ exports.getAllTotals = (req, res) => {
             'id',
             'name',
             'objectType',
-            [Sequelize.literal(`(SELECT SUM(invoices.total) FROM invoices WHERE invoices.objectId = "` + {$col: Object.id} +`")`), 'totals']
+            [Sequelize.literal(`(SELECT SUM(invoices.total) FROM invoices)`), 'totals']
         ],
         group: 'id' 
     })
