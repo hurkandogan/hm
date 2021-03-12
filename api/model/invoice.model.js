@@ -13,18 +13,18 @@ module.exports = (sequelize) => {
         objectId: {
             type: DataTypes.UUID,
             allowNull: false,
-            references: {
-                model: Object,
-                key: 'id'
-            }
+            // references: {
+            //     model: Object,
+            //     key: 'id'
+            // }
         },
         costTypeId: {
             type: DataTypes.UUID,
             allowNull: false,
-            references: {
-                model: CostType,
-                key: 'id'
-            }
+            // references: {
+            //     model: CostType,
+            //     key: 'id'
+            // }
         },
         date: {
             type: DataTypes.DATE,

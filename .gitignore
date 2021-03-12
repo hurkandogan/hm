@@ -23,6 +23,8 @@ client/yarn-error.log*
 
 .vscode
 
+db
+
 # env
 .env
 node_modules
