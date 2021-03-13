@@ -54,8 +54,8 @@ export default function Header(props) {
     };
 
     const handleMenuClose = () => {
-        AuthService.logout();
-        window.location.reload();
+        AuthService.logout()
+            .catch(err => console.log(err));
     };
 
     const menuId = 'primary-search-account-menu';
@@ -77,7 +77,7 @@ export default function Header(props) {
 
     const getUserInfo = (data) => {
         if (data) {
-            return (<p><Greeting />{data.firstName + " " + data.lastName}</p>)
+            return (<p><Greeting />{data}</p>)
         } else {
             return (<p>Not yet logged in!</p>)
         }
@@ -87,14 +87,13 @@ export default function Header(props) {
         <div>
             <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar>
-                    {/*<IconButton*/}
-                    {/*    edge="start"*/}
-                    {/*    className={classes.menuButton}*/}
-                    {/*    color="inherit"*/}
-                    {/*    aria-label="open drawer"*/}
-                    {/*>*/}
-                    {/*    <MenuIcon />*/}
-                    {/*</IconButton>*/}
+                    <IconButton
+                        edge="start"
+                        className={classes.menuButton}
+                        color="inherit"
+                        aria-label="open drawer"
+                    >
+                    </IconButton>
                     <Typography className={classes.title} variant="h6" noWrap>
                         Hausverwaltung Thönnesen
                     </Typography>

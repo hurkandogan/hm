@@ -57,7 +57,7 @@ function Login() {
             />
             <br />
             <br />
-            <Button variant="contained" color="primary" type="submit" onClick={login(loginData)}>
+            <Button variant="contained" color="primary" type="submit" onClick={() => { login(loginData) }}>
                 Login
         </Button>
         </div>);

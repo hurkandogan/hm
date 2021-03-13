@@ -32,7 +32,7 @@ exports.signup = (req, res) => {
 };
 
 exports.signin = (req, res) => {
-    const { mail, password } = req.body.data;
+    const { mail, password } = req.body;
 
     User.findOne({
         attributes: [
