@@ -16,7 +16,7 @@ const sequelize = new Sequelize(dbName, dbUser, dbPass, {
     host: dbHost,
     dialect: dbDial,
     port: dbPort,
-    logging: (...msg) => console.log(),
+    logging: false, //(...msg) => console.log(msg),
     
     pool: {
         max: dbPoolMax,
@@ -43,6 +43,9 @@ db.invoices.belongsTo(db.objects, { foreignKey: 'objectId' });
 db.costTypes.hasMany(db.invoices, { foreignKey: 'costTypeId' });
 db.invoices.belongsTo(db.costTypes, { foreignKey: 'costTypeId' });
 
+// Sessions storage
+db.sessionStorage = require('./session_store.model')(sequelize);
+
 // TODO: Roles implementation is needed!
 //db.roles.hasMany(db.users, { as: "users"});
 
@@ -52,7 +55,7 @@ const connection = async () => {
         await sequelize.authenticate();
         console.log("Database connection established.");
 
-        await sequelize.sync({ alter: false, force: false });
+        await sequelize.sync({ alter: true, force: false });
         //console.log("Database model synchronization is completed.");
     } catch (error) {
         console.log(error);

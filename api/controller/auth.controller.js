@@ -32,40 +32,55 @@ exports.signup = (req, res) => {
 };
 
 exports.signin = (req, res) => {
+    const { mail, password } = req.body;
+
     User.findOne({
+        attributes: [
+            'id',
+            'password',
+            'firstName',
+            'lastName',
+            'mail',
+            'roleId'
+
+        ],
         where: {
-            mail: req.body.data.mail
-        }
+            mail: mail
+        },
     })
         .then(user => {
+            // Check existing user
             if (!user) {
                 return res.status(404).send({ message: "User is not found!" });
             }
-
-            let passwordIsValid = bcrypt.compareSync(
-                req.body.data.password,
-                user.password
-            );
-            
-            if (!passwordIsValid) {
-                return res.status(401).send({
-                    accessToken: null,
-                    message: "Invalid Password!"
+            // Check password
+            bcrypt.compare(password, user.password)
+                .then(isMatch => {   
+                    if (!isMatch) {
+                        return res.status(401).send({ message: "Invalid Password!" });
+                    } else {
+                        const sessUser = {
+                            id: user.id,
+                            firstName: user.firstName,
+                            lastName: user.lastName,
+                            mail: user.mail
+                        }
+                        req.session.user = sessUser;
+                        console.log(user.firstName + ' ' + user.lastName +  ' signed in successfully.');
+                        res.status(200).send(sessUser);
+                    }
                 });
-            }
-
-            let token = jwt.sign({ id: user.id },
-                process.env.JWT_SECRET,
-                { expiresIn: 86400 });
-            
-            return res.status(200).send({
-                id: user.id,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                mail: user.mail,
-                role: "admin",
-                accessToken: token
-            })
         })
-    .catch(err => res.status(500).send({message: err}))
+        .catch(err => res.status(500).send({ message: err }));
 };
+
+exports.signOut = (req, res) => {
+    req.session.destroy()
+        .then(() => {
+            res.clearCookie("session-id");
+            res.send("Signed out successfully!");
+        })
+        .catch(err => {
+            console.log("auth.controller#signOut: " + err);
+        });
+}

@@ -16,8 +16,13 @@ app.use(cors());
 
 // Session
 app.use(session({
-    secret: process.env.SESSION_SECRET
+    secret: process.env.SESSION_SECRET,
+    //store: sessionStorage,
+    saveUninitialized: false,
+    resave: true
 }));
+
+//sessionStorage.sync();
 
 // Static Files
 const environment = process.env.NODE_ENV;

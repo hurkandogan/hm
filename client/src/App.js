@@ -26,30 +26,11 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
     const classes = useStyles();
-    const [currentUser, setCurrentUser] = useState(null);
-
-    useEffect(() => {
-        const user = AuthService.getCurrentUser();
-        if (user) {setCurrentUser(user);}
-    }, [])
-
-    const loginSubmit = async (data) => {
-        try {
-            await AuthService.login(data);
-
-        } catch (err) {
-            console.log(err);
-        }
-        window.location.reload();
-    }
 
     return (
         <div>
-            {!currentUser ? 
-            <Login login={loginSubmit} />
-                :
                 <div className={classes.root}>
-                <Header currentUser={currentUser} />
+                <Header currentUser={'Hürkan Dogan'} />
                 <Sidebar />
                 <main className={classes.content}>
                 <div className={classes.toolbar}>
@@ -60,7 +41,6 @@ function App() {
                 </div>
              </main>
             </div>
-            }
         </div>
   );
 }

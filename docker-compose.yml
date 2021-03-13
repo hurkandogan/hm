@@ -46,9 +46,10 @@ services:
   mysql:
     image: mysql:5.7
     volumes:
-      - type: bind
-        source: ./db
-        target: /var/lib/mysql
+      - hm-app-mysql-data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=secret
       - MYSQL_DATABASE=hugos
+
+volumes:
+  hm-app-mysql-data:
