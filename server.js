@@ -30,7 +30,12 @@ app.use(session({
     secret: process.env.SESSION_SECRET,
     store: sessionStore,
     saveUninitialized: false,
-    resave: true
+    resave: true,
+    name: 'hm_auth',
+    cookie: {
+        maxAge: 24*60*60*1000,
+        secure: false
+    }
 }));
 
 

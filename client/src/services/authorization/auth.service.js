@@ -11,16 +11,14 @@ const register = (username, email, password) => {
 const login = (data) => {
     return common_http.post("/api/signin", { data })
         .then((response) => {
-            if (response.data.accessToken) {
-                localStorage.setItem("user", JSON.stringify(response.data));
-            }
             return response.data;
         })
         .catch(err => console.log(err));
 };
 
 const logout = () => {
-   localStorage.removeItem("user");
+    return common_http.get("/api/signout")
+        .catch(err => console.log(err));
 };
 
 const getCurrentUser = () => {

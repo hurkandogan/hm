@@ -32,7 +32,7 @@ exports.signup = (req, res) => {
 };
 
 exports.signin = (req, res) => {
-    const { mail, password } = req.body;
+    const { mail, password } = req.body.data;
 
     User.findOne({
         attributes: [
@@ -66,7 +66,7 @@ exports.signin = (req, res) => {
                             mail: user.mail
                         }
                         req.session.user = sessUser;
-                        console.log(user.firstName + ' ' + user.lastName +  ' signed in successfully.');
+                        console.log(user.firstName + ' ' + user.lastName + ' signed in successfully.');
                         res.status(200).send(sessUser);
                     }
                 });
@@ -74,13 +74,13 @@ exports.signin = (req, res) => {
         .catch(err => res.status(500).send({ message: err }));
 };
 
-exports.signOut = (req, res) => {
-    req.session.destroy()
-        .then(() => {
-            res.clearCookie("session-id");
-            res.send("Signed out successfully!");
-        })
-        .catch(err => {
-            console.log("auth.controller#signOut: " + err);
-        });
+exports.signout = (req, res) => {
+    req.session.destroy((err) => {
+        if (!err) {
+            res.clearCookie("hm_auth");
+            res.status(200).send({message: "Signed out successfully!"});
+        } else {
+            console.log("auth.controller#signout: " + err);
+        }
+    });
 }

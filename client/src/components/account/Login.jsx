@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import AuthService from '../../services/authorization/auth.service';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function Login(props) {
+function Login() {
 
     const classes = useStyles();
 
@@ -29,9 +30,10 @@ function Login(props) {
             }
         })
     }
-
-    const login = () => {
-        props.login(loginData);
+    const login = (data) => {
+        AuthService.login(data)
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
     }
 
     return (
@@ -55,7 +57,7 @@ function Login(props) {
             />
             <br />
             <br />
-            <Button variant="contained" color="primary" onClick={login}>
+            <Button variant="contained" color="primary" type="submit" onClick={login(loginData)}>
                 Login
         </Button>
         </div>);
