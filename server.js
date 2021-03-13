@@ -3,6 +3,7 @@ const body = require('body-parser');
 const cors = require('cors');
 const process = require('process');
 const session = require('express-session');
+const MySqlStore = require('express-mysql-session')(session);
 require('dotenv').config();
 
 // Port
@@ -15,14 +16,23 @@ const app = express();
 app.use(cors());
 
 // Session
+// ? This connection can be established
+// ? with seqeulize on Production
+const options = {
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
+}
+const sessionStore = new MySqlStore(options);
 app.use(session({
     secret: process.env.SESSION_SECRET,
-    //store: sessionStorage,
+    store: sessionStore,
     saveUninitialized: false,
     resave: true
 }));
 
-//sessionStorage.sync();
 
 // Static Files
 const environment = process.env.NODE_ENV;
