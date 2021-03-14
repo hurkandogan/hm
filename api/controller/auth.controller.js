@@ -57,13 +57,14 @@ exports.signin = (req, res) => {
             bcrypt.compare(password, user.password)
                 .then(isMatch => {   
                     if (!isMatch) {
-                        return res.status(401).send({ message: "Invalid Password!" });
+                        return res.status(401).send({ message: "Invalid Password!", login: false });
                     } else {
                         const sessUser = {
                             id: user.id,
                             firstName: user.firstName,
                             lastName: user.lastName,
-                            mail: user.mail
+                            mail: user.mail,
+                            login: true
                         }
                         req.session.user = sessUser;
                         console.log(user.firstName + ' ' + user.lastName + ' signed in successfully.');

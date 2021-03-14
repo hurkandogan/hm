@@ -4,6 +4,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import Header from './shared/Header';
+import Sidebar from './navigation/Sidebar';
+import { FormHelperText } from '@material-ui/core';
 
 const useStyles = makeStyles({
     root: {
@@ -43,10 +46,10 @@ function Dashboard() {
             <Card key={data.object.id} className={classes.root}>
                 <CardContent>
                     <Typography variant="h5" component="h2">
-                        {data.object.name}
+                        {/* {data.object.name} */}
                     </Typography>
                     <Typography variant="body2" component="p">
-                        Total: {data.total_amount} €
+                        {/* Total: {data.total_amount} € */}
                     </Typography>
                 </CardContent>
             </Card>
@@ -55,8 +58,10 @@ function Dashboard() {
 
     return (
         <div>
+            <Header />
+            <Sidebar />
             <div className="row dashboard-card-row">
-                {totals.map(loadObjectCards)}
+                {/* {totals.map(loadObjectCards)} */}
             </div>
         </div>
     );
