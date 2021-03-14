@@ -6,7 +6,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Header from './shared/Header';
 import Sidebar from './navigation/Sidebar';
-import { FormHelperText } from '@material-ui/core';
 
 const useStyles = makeStyles({
     root: {

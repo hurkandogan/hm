@@ -77,21 +77,21 @@ function App() {
                                             label="Mail"
                                             onChange={changeHandler}
                                             />
-                                            <br />
-                                            <br />
-                                            <TextField
+                                        <br />
+                                        <br />
+                                        <TextField
                                             id="password"
                                             name="password"
                                             label="Password"
                                             type="password"
                                             autoComplete="current-password"
                                             onChange={changeHandler}
-                                            />
-                                            <br />
-                                            <br />
-                                            <Button variant="contained" color="primary" type="submit">
-                                            Login
-                                            </Button>
+                                        />
+                                        <br />
+                                        <br />
+                                        <Button variant="contained" color="primary" type="submit">
+                                        Login
+                                        </Button>
                                     </form>
                                 </div>
                             }
