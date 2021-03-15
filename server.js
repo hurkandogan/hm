@@ -41,7 +41,6 @@ app.use(session({
     }
 }));
 
-
 // Static Files
 const environment = process.env.NODE_ENV;
 if (environment === 'prod') {

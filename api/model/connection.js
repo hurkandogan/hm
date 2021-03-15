@@ -55,13 +55,13 @@ const connection = async () => {
         await sequelize.authenticate();
         console.log("Database connection established.");
 
-        await sequelize.sync({ alter: true, force: false });
+        await sequelize.sync({ alter: false, force: false });
         //console.log("Database model synchronization is completed.");
     } catch (error) {
         console.log(error);
     }
 }
 
-connection();
+//connection();
 
 module.exports = db;
