@@ -64,10 +64,11 @@ function InsertInvoiceForm() {
         });
     };
 
-    const saveInvoice = () => {
-        InvoiceService.insertInvoice(formData)
+    const saveInvoice = async (e) => {
+        await InvoiceService.insertInvoice(formData)
             .then(response => console.log(response))
             .catch(err => console.log("Invoice is not created! " + err));
+        e.preventDefault();
     };
 
     return (
@@ -75,72 +76,75 @@ function InsertInvoiceForm() {
             <div className="page-headline">
                 <h2>Insert new invoice</h2>
             </div>
-            <FormControl className={classes.formControl}>
-                <TextField
-                    id="date"
-                    name="date"
-                    label="Invoice Date"
-                    type="date"
-                    defaultValue="yyy-MM-dd"
-                    onChange={changeHandler}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                />
-            </FormControl>
-            <FormControl className={classes.formControl}>
-                <InputLabel shrink id="objects">
-                    Choose an Object
+            <form onSubmit={saveInvoice}>
+                <FormControl className={classes.formControl}>
+                    <TextField
+                        id="date"
+                        name="date"
+                        label="Invoice Date"
+                        type="date"
+                        defaultValue="yyy-MM-dd"
+                        onChange={changeHandler}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                    />
+                </FormControl>
+                <FormControl className={classes.formControl}>
+                    <InputLabel shrink id="objects">
+                        Choose an Object
                 </InputLabel>
-                <Select
-                    labelId="objects"
-                    id="objects"
-                    name="objectID"
-                    displayEmpty
-                    autoWidth
-                    onChange={changeHandler}
-                >
-                    <MenuItem disabled key={0} value={''}>Choose an Object</MenuItem>
-                    {objectsList.map(objectsSelectBox)}
-                </Select>
-            </FormControl>
-            <FormControl className={classes.formControl}>
-                <InputLabel shrink id="objects">
-                    Choose the Cost Type
+                    <Select
+                        labelId="objects"
+                        id="objects"
+                        name="objectID"
+                        displayEmpty
+                        autoWidth
+                        onChange={changeHandler}
+                    >
+                        <MenuItem disabled key={0} value={''}>Choose an Object</MenuItem>
+                        {objectsList.map(objectsSelectBox)}
+                    </Select>
+                </FormControl>
+                <FormControl className={classes.formControl}>
+                    <InputLabel shrink id="objects">
+                        Choose the Cost Type
                 </InputLabel>
-                <Select
-                    labelId="costType"
-                    id="costType"
-                    name="costTypeID"
-                    displayEmpty
-                    autoWidth
-                    onChange={changeHandler}
-                >
-                    <MenuItem disabled key={0} value={''}>Choose the Cost Type</MenuItem>
-                    <MenuItem value="086dabd0-7d21-11eb-8d22-c509cb1665f9">General (Only: Verwaltungskosten, Carls Aufw. und Praxis)</MenuItem>
-                    {/* <MenuItem value="28e5a600-5040-11eb-b5b3-0ddba2819351">Erhaltungsaufwendungen</MenuItem>
+                    <Select
+                        labelId="costType"
+                        id="costType"
+                        name="costTypeID"
+                        displayEmpty
+                        autoWidth
+                        onChange={changeHandler}
+                    >
+                        <MenuItem disabled key={0} value={''}>Choose the Cost Type</MenuItem>
+                        <MenuItem value="086dabd0-7d21-11eb-8d22-c509cb1665f9">General (Only: Verwaltungskosten, Carls Aufw. und Praxis)</MenuItem>
+                        {/* 
+                    <MenuItem value="28e5a600-5040-11eb-b5b3-0ddba2819351">Erhaltungsaufwendungen</MenuItem>
                     <MenuItem value="2d7d2f80-5040-11eb-b5b3-0ddba2819351">Nebenkosten</MenuItem>
                     <MenuItem value="3361ab60-5040-11eb-b5b3-0ddba2819351">Weitere Aufwendungen</MenuItem>
                     <MenuItem value="38ea2490-5040-11eb-b5b3-0ddba2819351">Versicherungen</MenuItem> */}
 
-                </Select>
-            </FormControl>
-            <FormControl className={classes.formControl}>
-                <TextField id="firm" name="firm" label="Firm" onChange={changeHandler} />
-            </FormControl>
-            <FormControl className={classes.formControl}>
-                <TextField id="description" name="description" label="Description" onChange={changeHandler} />
-            </FormControl>
-            <FormControl className={classes.formControl}>
-                <TextField id="total" name="total" label="Cost" onChange={changeHandler} />
-            </FormControl>
-            <FormControl className={classes.formControl}>
-                <TextField id="invoiceLink" name="invoiceLink" label="Invoice Link" onChange={changeHandler} />
-            </FormControl>
-            {/* <FormControl className={classes.formControl}>
+                    </Select>
+                </FormControl>
+                <FormControl className={classes.formControl}>
+                    <TextField id="firm" name="firm" label="Firm" onChange={changeHandler} />
+                </FormControl>
+                <FormControl className={classes.formControl}>
+                    <TextField id="description" name="description" label="Description" onChange={changeHandler} />
+                </FormControl>
+                <FormControl className={classes.formControl}>
+                    <TextField id="total" name="total" label="Cost" onChange={changeHandler} />
+                </FormControl>
+                <FormControl className={classes.formControl}>
+                    <TextField id="invoiceLink" name="invoiceLink" label="Invoice Link" onChange={changeHandler} />
+                </FormControl>
+                {/* <FormControl className={classes.formControl}>
                 Payment: <Checkbox onChange={changeHandler} name="payment" id="payment" />
             </FormControl> */}
-            <Button variant="contained" color="primary" type="submit" onClick={saveInvoice}>Submit</Button>
+                <Button variant="contained" color="primary" type="submit">Submit</Button>
+            </form>
         </div>
     );
 }

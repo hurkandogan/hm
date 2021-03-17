@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { Switch, Route } from "react-router-dom";
 
 // Components
+import Header from './components/shared/Header';
+import Sidebar from './components/navigation/Sidebar';
 import Dashboard from './components/Dashboard';
+import InvoiceTable from './components/invoices/InvoiceTable';
 import AuthService from './services/authorization/auth.service';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -62,13 +65,14 @@ function App() {
     return (
         <div>
             <div className={classes.root}>
+                <Header />
+                <Sidebar />
                 <main className={classes.content}>
                     <div className={classes.toolbar}>
                         <Switch>
-                            {loggedIn ?
                                 <Route exact path={'/'} component={Dashboard} />
-                                :
-                                <div className={classes.login}>
+                                <Route exact path={'/invoices/:objectId'} component={InvoiceTable} />
+                                {/* <div className={classes.login}>
                                     <h1>Welcome to Hausverwaltung Thönnessen</h1>
                                     <form onSubmit={submit}>
                                         <TextField
@@ -93,8 +97,8 @@ function App() {
                                         Login
                                         </Button>
                                     </form>
-                                </div>
-                            }
+                                </div> */}
+                            
                         </Switch>
                     </div>
                 </main>

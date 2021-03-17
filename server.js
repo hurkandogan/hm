@@ -19,8 +19,6 @@ app.use(cors({
 }));
 
 // Session
-// ? This connection can be established
-// ? with seqeulize on Production
 const options = {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,

@@ -11,7 +11,7 @@ const register = (username, email, password) => {
 const login = (data) => {
     return common_http.post("/api/signin", data, {
         withCredentials: true
-    } )
+    })
         .then((response) => {
             return response.data;
         })

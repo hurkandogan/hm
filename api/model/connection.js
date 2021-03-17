@@ -50,7 +50,7 @@ db.sessionStorage = require('./session_store.model')(sequelize);
 //db.roles.hasMany(db.users, { as: "users"});
 
 // Connection Test
-const connection = async () => {
+const connectionTest = async () => {
     try {
         await sequelize.authenticate();
         console.log("Database connection established.");
@@ -62,6 +62,6 @@ const connection = async () => {
     }
 }
 
-//connection();
+//connectionTest();
 
 module.exports = db;
