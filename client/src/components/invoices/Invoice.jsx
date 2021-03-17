@@ -1,11 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from "@material-ui/core/TableCell";
 import Badge from '@material-ui/core/Badge';
 import Typography from '@material-ui/core/Typography'
 import moment from 'moment';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
@@ -13,8 +11,7 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 function Invoice(props) {
-    const [open, setOpen] = React.useState(false);
-    const { row } = props;
+    const [open, setOpen] = useState(false);
 
     const paymentBadge = (data) => {
         return data ? <Badge color="secondary"><Typography>Paid</Typography></Badge> : <Badge color="secondary" variant="dot"><Typography>Unpaid</Typography></Badge>;
