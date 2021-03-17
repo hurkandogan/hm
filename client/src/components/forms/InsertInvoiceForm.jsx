@@ -42,11 +42,8 @@ function InsertInvoiceForm() {
 
     const objectData = () => {
         findAllObjects()
-            .then(response => {
-                const objects = response.data
-                setObject(objects);
-            })
-            .catch(err => console.log("Sidebar#Sidebar#retrieveObjects: " + err));
+            .then(response => setObject(response.data))
+            .catch(err => console.log(err));
     }
     const objectsSelectBox = (data) => {
         return (

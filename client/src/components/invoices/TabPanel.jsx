@@ -48,6 +48,7 @@ function TabPanel(props) {
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>
                         <TableRow>
+                            <TableCell align="left">#</TableCell>
                             <TableCell align="left">Date</TableCell>
                             <TableCell align="left">Firma</TableCell>
                             <TableCell align="left">Description</TableCell>
