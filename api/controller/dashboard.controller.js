@@ -12,6 +12,7 @@ exports.getAllTotals = (req, res) => {
             'id',
             'name',
             'objectType',
+            // This query will be talked with Shantini
             [Sequelize.literal(`(SELECT SUM(invoices.total) FROM invoices)`), 'totals']
         ],
         group: 'id' 
