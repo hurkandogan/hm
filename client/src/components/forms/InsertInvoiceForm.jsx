@@ -4,7 +4,6 @@ import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
-// import Checkbox from '@material-ui/core/Checkbox';
 import InputLabel from '@material-ui/core/InputLabel';
 import { makeStyles } from '@material-ui/core/styles';
 import InvoiceService from '../../services/invoice.service';
@@ -90,7 +89,7 @@ function InsertInvoiceForm() {
                 <FormControl className={classes.formControl}>
                     <InputLabel shrink id="objects">
                         Choose an Object
-                </InputLabel>
+                    </InputLabel>
                     <Select
                         labelId="objects"
                         id="objects"
@@ -106,7 +105,7 @@ function InsertInvoiceForm() {
                 <FormControl className={classes.formControl}>
                     <InputLabel shrink id="objects">
                         Choose the Cost Type
-                </InputLabel>
+                    </InputLabel>
                     <Select
                         labelId="costType"
                         id="costType"

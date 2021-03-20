@@ -7,8 +7,8 @@ import Sidebar from './components/navigation/Sidebar';
 import Dashboard from './components/Dashboard';
 import InvoiceTable from './components/invoices/InvoiceTable';
 import AuthService from './services/authorization/auth.service';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+// import TextField from '@material-ui/core/TextField';
+// import Button from '@material-ui/core/Button';
 
 //import Dashboard from "./components/Dashboard";
 import { makeStyles } from '@material-ui/core/styles';
@@ -32,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
 function App() {
     const classes = useStyles();
 
-    const [loggedIn, setLogin] = useState(false);
     const [loginData, setLoginData] = useState({
         mail: "",
         password: ""
@@ -47,20 +46,6 @@ function App() {
             }
         })
     }
-    const submit = (e) => {
-        e.preventDefault();
-
-        AuthService.login(loginData)
-            .then(res => {
-                console.log(res);
-                if (res.login) {
-                    setLogin(true);
-                } else {
-                    setLogin(false);
-                }
-            })
-            .catch(err => console.log(err));
-    }
 
     return (
         <div>
@@ -71,34 +56,7 @@ function App() {
                     <div className={classes.toolbar}>
                         <Switch>
                                 <Route exact path={'/'} component={Dashboard} />
-                                <Route exact path={'/invoices/:objectId'} component={InvoiceTable} />
-                                {/* <div className={classes.login}>
-                                    <h1>Welcome to Hausverwaltung Thönnessen</h1>
-                                    <form onSubmit={submit}>
-                                        <TextField
-                                            name="mail"
-                                            id="mail"
-                                            label="Mail"
-                                            onChange={changeHandler}
-                                            />
-                                        <br />
-                                        <br />
-                                        <TextField
-                                            id="password"
-                                            name="password"
-                                            label="Password"
-                                            type="password"
-                                            autoComplete="current-password"
-                                            onChange={changeHandler}
-                                        />
-                                        <br />
-                                        <br />
-                                        <Button variant="contained" color="primary" type="submit">
-                                        Login
-                                        </Button>
-                                    </form>
-                                </div> */}
-                            
+                                <Route exact path={'/invoices/:objectId'} component={InvoiceTable} />       
                         </Switch>
                     </div>
                 </main>

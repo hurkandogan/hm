@@ -31,12 +31,13 @@ function Invoice(props) {
 
     useEffect(() => {
         setInvoice(props.invoice);
-    }, [props.invoice])
+    }, [props.invoice]);
 
-    const updateInvoice = (invoice) => {
-        InvoiceService.updateInvoice(invoice)
+    const updateInvoice = async (e) => {
+        await InvoiceService.updateInvoice(invoice)
             .then(response => console.log(response))
             .catch(err => console.log(err));
+        e.preventDefault();
     }
 
     const changeHandler = (event) => {
@@ -76,16 +77,21 @@ function Invoice(props) {
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
+                                    onChange={changeHandler}
                                 />
                                 <TextField
                                     id="standard-helperText"
                                     label="Firm"
+                                    name="firm"
                                     defaultValue={invoice.firm}
+                                    onChange={changeHandler}
                                 />
                                 <TextField
                                     id="standard-helperText"
                                     label="Desc."
+                                    name="description"
                                     defaultValue={invoice.description}
+                                    onChange={changeHandler}
                                 />
                                 <TextField
                                     id="standard-helperText"
@@ -100,7 +106,9 @@ function Invoice(props) {
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
+                                    name="payment"
                                     value={invoice.payment ? 1 : 0}
+                                    onChange={changeHandler}
                                 >
                                     <MenuItem value={0}>Unpaid</MenuItem>
                                     <MenuItem value={1}>Paid</MenuItem>

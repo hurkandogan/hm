@@ -9,7 +9,7 @@ const insertInvoice = (data) => {
 }
 
 const updateInvoice = (data) => {
-    return common_http.post("/api/invoices/update/" + data.id);
+    return common_http.put("/api/invoices/update/" + data.id, data);
 }
 
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */

@@ -110,7 +110,7 @@ exports.createInvoice = (req, res) => {
 
 // Update
 exports.updateInvoice = (req, res) => {
-  const id = req.params.id;
+    const id = req.params.id;
     Invoice.update({
         objectId: req.body.objectID,
         costTypeId: req.body.costTypeID,
@@ -119,7 +119,7 @@ exports.updateInvoice = (req, res) => {
         description: req.body.description,
         total: req.body.total,
         payment: req.body.payment,
-        link: req.body.invoiceLink,
+        link: req.body.invoiceLink
     }, {
       where: {
           id: id
@@ -127,9 +127,9 @@ exports.updateInvoice = (req, res) => {
   })
       .then(data => {
           if (data) {
-              console.log("Invoice updated.");
+              console.log("Invoice with id: '" + id +  "' updated.");
               res.status(200).send({
-                  message: 'Invoice is succesfully deleted.'
+                  message: 'Invoice is succesfully updated.'
               });
           } else {
               res.status(404).send({
