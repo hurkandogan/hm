@@ -9,6 +9,10 @@ import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 function Invoice(props) {
     const [open, setOpen] = useState(false);
@@ -36,8 +40,43 @@ function Invoice(props) {
                         <Box margin={1}>
                             <Typography variant="h6" gutterBottom component="div">Edit</Typography>
                             <form>
-                                <input />
-                                <input />
+                                <TextField
+                                    id="date"
+                                    name="date"
+                                    label="Invoice Date"
+                                    type="date"
+                                    defaultValue="yyy-MM-dd"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+                                <TextField
+                                    id="standard-helperText"
+                                    label="Firm"
+                                    defaultValue="Default Value"
+                                />
+                                <TextField
+                                    id="standard-helperText"
+                                    label="Desc."
+                                    defaultValue="Default Value"
+                                />
+                                <TextField
+                                    id="standard-helperText"
+                                    label="Amount"
+                                    defaultValue="Default Value"
+                                />
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={0}
+                                    onChange={console.log("Test")}
+                                >
+                                    <MenuItem value={0}>Unpaid</MenuItem>
+                                    <MenuItem value={1}>Paid</MenuItem>
+                                </Select>
+                                <Button variant="contained" color="primary">
+                                    Primary
+                                </Button>
                             </form>
                         </Box>
                     </Collapse>

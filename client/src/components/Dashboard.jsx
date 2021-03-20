@@ -28,39 +28,38 @@ const useStyles = makeStyles({
 
 function Dashboard() {
     const classes = useStyles();
-    const [totals, setTotals] = useState([]);
+    const [objects, setObjects] = useState([]);
 
     useEffect(() => {
         objectData();
-    }, []);
+    }, [objects]);
 
     const objectData = () => {
         DashboardService.loadDashboardTotals()
-            .then(response => setTotals(response.data))
+            .then(response => setObjects(response.data))
             .catch(err => console.log("Sidebar#Sidebar#retrieveObjects: " + err));
     }
 
     const loadObjectCards = (data) => {
         return (
-            <Card key={data.object.id} className={classes.root}>
+            <Card key={data.id} className={classes.root}>
                 <CardContent>
                     <Typography variant="h5" component="h2">
-                        {/* {data.object.name} */}
+                        {data.name}
                     </Typography>
                     <Typography variant="body2" component="p">
-                        {/* Total: {data.total_amount} € */}
+                        Total: {data.invoices[0].totals} €
                     </Typography>
                 </CardContent>
             </Card>
         );
     };
-
     return (
         <div>
             <Header />
             <Sidebar />
             <div className="row dashboard-card-row">
-                {/* {totals.map(loadObjectCards)} */}
+                {objects.map(loadObjectCards)}
             </div>
         </div>
     );

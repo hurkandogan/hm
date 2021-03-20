@@ -5,17 +5,22 @@ const Invoice = db.invoices;
 const Object = db.objects;
 const CostType = db.costTypes;
 
-// TODO: New Feature: Objects should have the costTypes Totals as child to show on Dashboard
 exports.getAllTotals = (req, res) => {
     Object.findAll({
         attributes: [
-            'id',
+            ['id', 'objectID'],
             'name',
-            'objectType',
-            // This query will be talked with Shantini
-            [Sequelize.literal(`(SELECT SUM(invoices.total) FROM invoices)`), 'totals']
+            'objectType'
         ],
-        group: 'id' 
+        include:
+            {
+                model: Invoice,
+                attributes: [
+                    [Sequelize.fn('SUM', Sequelize.col('total')), 'totals']
+                ],
+                group: 'objectId'
+            },
+        group: 'id'
     })
         .then(data => res.status(200).send(data))
         .catch(err => {
