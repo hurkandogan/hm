@@ -13,13 +13,13 @@ exports.getAllTotals = (req, res) => {
             'objectType'
         ],
         include:
-            {
-                model: Invoice,
-                attributes: [
-                    [Sequelize.fn('SUM', Sequelize.col('total')), 'totals']
-                ],
-                group: 'objectId'
-            },
+        {
+            model: Invoice,
+            attributes: [
+                [Sequelize.fn('SUM', Sequelize.col('total')), 'totals']
+            ],
+            group: 'objectId'
+        },
         group: 'id'
     })
         .then(data => res.status(200).send(data))

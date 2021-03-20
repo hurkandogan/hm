@@ -7,32 +7,22 @@ import Typography from '@material-ui/core/Typography';
 import Header from './shared/Header';
 import Sidebar from './navigation/Sidebar';
 
-const useStyles = makeStyles({
-    root: {
-        width: 300,
-        float: 'left',
-        margin: '25px 50px',
-    },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
-    },
-    title: {
-        fontSize: 14,
-    },
-    pos: {
-        marginBottom: 12,
-    },
-});
-
 function Dashboard() {
+
+    const useStyles = makeStyles({
+        root: {
+            width: 300,
+            float: 'left',
+            margin: '25px 50px',
+        },
+    });
+
     const classes = useStyles();
     const [objects, setObjects] = useState([]);
 
     useEffect(() => {
         objectData();
-    }, [objects]);
+    }, []);
 
     const objectData = () => {
         DashboardService.loadDashboardTotals()
@@ -42,7 +32,7 @@ function Dashboard() {
 
     const loadObjectCards = (data) => {
         return (
-            <Card key={data.id} className={classes.root}>
+            <Card key={data.objectID} className={classes.root}>
                 <CardContent>
                     <Typography variant="h5" component="h2">
                         {data.name}
@@ -58,9 +48,7 @@ function Dashboard() {
         <div>
             <Header />
             <Sidebar />
-            <div className="row dashboard-card-row">
-                {objects.map(loadObjectCards)}
-            </div>
+            {objects.map(loadObjectCards)}
         </div>
     );
 }

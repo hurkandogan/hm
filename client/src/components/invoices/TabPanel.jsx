@@ -18,7 +18,6 @@ const useStyles = makeStyles({
 function TabPanel(props) {
 
     const classes = useStyles();
-
     const [invoices, setInvoices] = useState([]);
 
     useEffect(() => {
@@ -31,10 +30,7 @@ function TabPanel(props) {
     };
 
     const iterateAndFilterInvoices = (data) => {
-        // TODO:  This part is wrong. It should be filtered with React reduce() or filter()
-        if (data.costTypeId === props.panelCostType) {
-            return <Invoice key={data.id} invoice={data} />
-        }
+        return <Invoice key={data.id} invoice={data} />
     };
 
     return (
@@ -57,7 +53,7 @@ function TabPanel(props) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {invoices.map(iterateAndFilterInvoices)}
+                        {invoices.filter(invoice => invoice.costTypeId.includes(props.panelCostType)).map(iterateAndFilterInvoices)}
                     </TableBody>
                 </Table>
             </TableContainer>
