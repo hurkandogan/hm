@@ -49,7 +49,6 @@ function TabPanel(props) {
                             <TableCell align="left">Firma</TableCell>
                             <TableCell align="left">Description</TableCell>
                             <TableCell align="left">Total</TableCell>
-                            <TableCell align="left">Payment</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
