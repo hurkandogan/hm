@@ -12,6 +12,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import InvoiceService from '../../services/invoice.service';
 
 function Invoice(props) {
     const [open, setOpen] = useState(false);
@@ -33,7 +34,19 @@ function Invoice(props) {
     }, [props.invoice])
 
     const updateInvoice = (invoice) => {
+        InvoiceService.updateInvoice(invoice)
+            .then(response => console.log(response))
+            .catch(err => console.log(err));
+    }
 
+    const changeHandler = (event) => {
+        const { value, name } = event.target;
+        setInvoice(prevValue => {
+            return {
+                ...prevValue,
+                [name]: value
+            }
+        });
     }
 
     return (
@@ -76,11 +89,13 @@ function Invoice(props) {
                                 />
                                 <TextField
                                     id="standard-helperText"
+                                    name="total"
                                     label="Total"
                                     defaultValue={invoice.total}
                                     InputProps={{
                                         endAdornment: <InputAdornment position="start">€</InputAdornment>,
                                     }}
+                                    onChange={changeHandler}
                                 />
                                 <Select
                                     labelId="demo-simple-select-label"

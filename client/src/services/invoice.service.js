@@ -8,8 +8,13 @@ const insertInvoice = (data) => {
     return common_http.post("/api/invoices", data);
 }
 
+const updateInvoice = (data) => {
+    return common_http.post("/api/invoices/update/" + data.id);
+}
+
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {
     findInvoices,
-    insertInvoice
+    insertInvoice,
+    updateInvoice
 };

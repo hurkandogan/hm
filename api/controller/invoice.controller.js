@@ -17,6 +17,7 @@ exports.getAllInvoices = (req, res) => {
             });
     });
 };
+
 exports.getObjectInvoices = (req, res) => {
     const objectId = req.params.objectID;
     Object.findAll({
@@ -67,8 +68,8 @@ exports.getObjectInvoices = (req, res) => {
 // Insert
 exports.createInvoice = (req, res) => {
 
-    const objectID = req.body.objectID;
-    const costTypeID = req.body.costTypeID;
+    const objectId = req.body.objectID;
+    const costTypeId = req.body.costTypeID;
     const date = req.body.date;
     const firm = req.body.firm;
     const description = req.body.description;
@@ -86,8 +87,8 @@ exports.createInvoice = (req, res) => {
     }
 
     const data = {
-        objectId: objectID,
-        costTypeId: costTypeID,
+        objectId: objectId,
+        costTypeId: costTypeId,
         date: date,
         firm: firm,
         description: description,
@@ -108,6 +109,41 @@ exports.createInvoice = (req, res) => {
 };
 
 // Update
+exports.updateInvoice = (req, res) => {
+  const id = req.params.id;
+    Invoice.update({
+        objectId: req.body.objectID,
+        costTypeId: req.body.costTypeID,
+        date: req.body.date,
+        firm: req.body.firm,
+        description: req.body.description,
+        total: req.body.total,
+        payment: req.body.payment,
+        link: req.body.invoiceLink,
+    }, {
+      where: {
+          id: id
+      }
+  })
+      .then(data => {
+          if (data) {
+              console.log("Invoice updated.");
+              res.status(200).send({
+                  message: 'Invoice is succesfully deleted.'
+              });
+          } else {
+              res.status(404).send({
+                  message: 'Invoice is not found.'
+              });
+          }
+    })
+      .catch(err => {
+          res.status(500).send({
+              message: 'invoice.controller#updateInvoice: ' +err
+          });
+      });
+};
+
 // Delete
 exports.deleteInvoice = (req, res) => {
   const id = req.params.id;
