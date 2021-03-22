@@ -62,6 +62,6 @@ const connectionTest = async () => {
     }
 }
 
-//connectionTest();
+connectionTest();
 
 module.exports = db;

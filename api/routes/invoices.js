@@ -11,7 +11,7 @@ module.exports = function (app) {
         next();
     });
     app.get('/api/invoices', Invoice.getAllInvoices);
-    app.get('/api/invoices/:objectID', Invoice.getObjectInvoices);
+    app.get('/api/invoices/:objectId', Invoice.getObjectInvoices);
     app.post('/api/invoices', Invoice.createInvoice);
     app.put('/api/invoices/update/:id', Invoice.updateInvoice);
     app.delete('/api/invoices/delete/:id', Invoice.deleteInvoice);

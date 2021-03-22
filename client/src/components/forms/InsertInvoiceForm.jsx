@@ -8,6 +8,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import { makeStyles } from '@material-ui/core/styles';
 import InvoiceService from '../../services/invoice.service';
 import findAllObjects from "../../services/object.service";
+import { InvoiceInput } from "../custom_hooks/InvoiceInput";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -24,16 +25,7 @@ const useStyles = makeStyles((theme) => ({
 function InsertInvoiceForm() {
     const classes = useStyles();
     const [objectsList, setObject] = useState([]);
-    const [formData, setFormData] = useState({
-        objectID: '',
-        costTypeID: '',
-        date: '',
-        firm: '',
-        description: '',
-        total: '',
-        payment: false,
-        invoiceLink: ''
-    });
+    const [formData, changeHandler] = InvoiceInput();
 
     useEffect(() => {
         objectData();
@@ -50,21 +42,12 @@ function InsertInvoiceForm() {
         );
     };
 
-    const changeHandler = (event) => {
-        const { value, name } = event.target;
-        setFormData(prevValue => {
-            return {
-                ...prevValue,
-                [name]: value
-            }
-        });
-    };
-
-    const saveInvoice = async (e) => {
-        await InvoiceService.insertInvoice(formData)
+    const saveInvoice = e => {
+        InvoiceService.insertInvoice(formData)
             .then(response => console.log(response))
             .catch(err => console.log("Invoice is not created! " + err));
-        e.preventDefault();
+        console.log(formData);
+        //e.preventDefault();
     };
 
     return (
@@ -93,7 +76,7 @@ function InsertInvoiceForm() {
                     <Select
                         labelId="objects"
                         id="objects"
-                        name="objectID"
+                        name="objectId"
                         displayEmpty
                         autoWidth
                         onChange={changeHandler}
@@ -109,7 +92,7 @@ function InsertInvoiceForm() {
                     <Select
                         labelId="costType"
                         id="costType"
-                        name="costTypeID"
+                        name="costTypeId"
                         displayEmpty
                         autoWidth
                         onChange={changeHandler}
@@ -136,9 +119,24 @@ function InsertInvoiceForm() {
                 <FormControl className={classes.formControl}>
                     <TextField id="invoiceLink" name="invoiceLink" label="Invoice Link" onChange={changeHandler} />
                 </FormControl>
-                {/* <FormControl className={classes.formControl}>
-                Payment: <Checkbox onChange={changeHandler} name="payment" id="payment" />
-            </FormControl> */}
+                <FormControl className={classes.formControl}>
+                    <InputLabel shrink id="payment">
+                        Choose the Payment Status
+                    </InputLabel>
+                    <Select
+                        labelId="payment"
+                        id="payment"
+                        name="payment"
+                        displayEmpty
+                        autoWidth
+                        onChange={changeHandler}
+                    >
+                        <MenuItem disabled value={''}>Choose status</MenuItem>
+                        <MenuItem value={1}>Paid</MenuItem>
+                        <MenuItem value={0}>Not Paid</MenuItem>
+
+                    </Select>
+                </FormControl>
                 <Button variant="contained" color="primary" type="submit">Submit</Button>
             </form>
         </div>

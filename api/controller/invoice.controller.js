@@ -19,7 +19,7 @@ exports.getAllInvoices = (req, res) => {
 };
 
 exports.getObjectInvoices = (req, res) => {
-    const objectId = req.params.objectID;
+    const objectId = req.params.objectId;
     Object.findAll({
         where: {
             id: objectId
@@ -68,18 +68,17 @@ exports.getObjectInvoices = (req, res) => {
 // Insert
 exports.createInvoice = (req, res) => {
 
-    const objectId = req.body.objectID;
-    const costTypeId = req.body.costTypeID;
+    const objectId = req.body.objectId;
+    const costTypeId = req.body.costTypeId;
     const date = req.body.date;
     const firm = req.body.firm;
     const description = req.body.description;
     const total = req.body.total;
     const payment = req.body.payment;
     const link = req.body.invoiceLink;
-
     // TODO: Validation for data insert
 
-    if(!objectID || !costTypeID || !date || !total){
+    if(!objectId || !costTypeId || !date || !total){
         res.status(400).send({
             message: "Some of the informations are not filled."
         });
@@ -96,12 +95,14 @@ exports.createInvoice = (req, res) => {
         payment: payment,
         invoiceLink: link
     }
-
+    
     Invoice.create(data)
         .then(data => {
+            console.log(data);
             res.send("New invoice is created: " + JSON.stringify(data, null, 4));
         })
         .catch(err => {
+            console.log(err);
             res.status(500).send({
                 message: "invoice.controller#createInvoice: An error occured: " + err
             });
@@ -112,8 +113,8 @@ exports.createInvoice = (req, res) => {
 exports.updateInvoice = (req, res) => {
     const id = req.params.id;
     Invoice.update({
-        objectId: req.body.objectID,
-        costTypeId: req.body.costTypeID,
+        objectId: req.body.objectId,
+        costTypeId: req.body.costTypeId,
         date: req.body.date,
         firm: req.body.firm,
         description: req.body.description,

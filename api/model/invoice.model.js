@@ -43,6 +43,7 @@ module.exports = (sequelize) => {
         },
         payment: {
             type: DataTypes.BOOLEAN,
+            defaultValue: false
         },
         invoiceLink: {
             type: DataTypes.STRING

@@ -42,12 +42,7 @@ function Invoice(props) {
 
     const changeHandler = (event) => {
         const { value, name } = event.target;
-        setInvoice(prevValue => {
-            return {
-                ...prevValue,
-                [name]: value
-            }
-        });
+        setInvoice({ ...invoice, [name]: value });
     }
 
     return (
