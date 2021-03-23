@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
@@ -77,7 +77,6 @@ function InsertInvoiceForm(props) {
                         onChange={changeHandler}
                     >
                         <MenuItem disabled key={0} value={''}>Choose an Object</MenuItem>
-                        {console.log(props.objects)}
                         {props.objects.map(objectsSelectBox)}
                     </Select>
                 </FormControl>
