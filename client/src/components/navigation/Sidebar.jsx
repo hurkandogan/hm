@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import InsertInvoiceModal from '../forms/InsertInvoiceModal';
-import findAllObjects from '../../services/object.service.js';
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
@@ -14,6 +13,10 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+import { connect } from 'react-redux';
+import { getObjects } from '../../redux/actions/objectAction';
 
 const drawerWidth = 280;
 
@@ -21,25 +24,10 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
     },
-    listContainer: {
-        maxWidth: '100%',
-    },
     drawer: {
         [theme.breakpoints.up('sm')]: {
             width: drawerWidth,
             flexShrink: 0,
-        },
-    },
-    appBar: {
-        [theme.breakpoints.up('sm')]: {
-            width: `calc(100% - ${drawerWidth}px)`,
-            marginLeft: drawerWidth,
-        },
-    },
-    menuButton: {
-        marginRight: theme.spacing(2),
-        [theme.breakpoints.up('sm')]: {
-            display: 'none',
         },
     },
     // necessary for content to be below app bar
@@ -58,25 +46,15 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function Sidebar() {
+function Sidebar(props) {
 
     const classes = useStyles();
     const theme = useTheme();
-    const [objectsList, setObject] = useState([]);
     const [insertInvoicePopupToggle, setInsertInvoicePopupToggle] = useState(false);
 
     useEffect(() => {
-        objectData();
+        props.getObjects();
     }, []);
-
-    const objectData = () => {
-        findAllObjects()
-            .then(response => {
-                const objects = response.data
-                setObject(objects);
-            })
-            .catch(err => console.log("Sidebar#Sidebar#retrieveObjects: " + err));
-    }
 
     const loadObjects = (data) => {
         return (
@@ -114,12 +92,11 @@ function Sidebar() {
                     </ListItem>
                 </Link>
                 <Divider />
-                {objectsList.map((data) => loadObjects(data))}
+                {props.objects.map((object) => loadObjects(object))}
                 <Divider />
             </List>
         </div >
     );
-
     return (
         <div className={classes.root}>
             <nav className={classes.drawer} aria-label="mailbox folders">
@@ -131,20 +108,27 @@ function Sidebar() {
                             paper: classes.drawerPaper,
                         }}
                         ModalProps={{
-                            keepMounted: true, // Better open performance on mobile.
+                            keepMounted: true,
                         }}
                     >
-                        {drawer}
-                        <InsertInvoiceModal visible={insertInvoicePopupToggle} />
+                        {props.isLoading ? <CircularProgress /> : drawer}
+                        < InsertInvoiceModal visible={insertInvoicePopupToggle} />
                     </Drawer>
                 </Hidden>
                 <Hidden xsDown implementation="css">
                     <Drawer classes={{ paper: classes.drawerPaper }} variant="permanent" open>
-                        {drawer}
+                        {props.isLoading ? <CircularProgress /> : drawer}
                     </Drawer>
                 </Hidden>
             </nav>
         </div>
     );
 }
-export default Sidebar;
+
+const mapStateToProps = state => {
+    return {
+        objects: state.objects,
+        isLoading: state.isLoading
+    }
+}
+export default connect(mapStateToProps, { getObjects })(Sidebar);

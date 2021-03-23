@@ -21,7 +21,8 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.paper,
     },
 }));
-
+// TODO: Clean and create smaller components
+// TODO: Less states!!
 function InvoiceTable(props) {
     const { objectId } = useParams();
     const [invoices, setInvoices] = useState([]);
@@ -35,7 +36,7 @@ function InvoiceTable(props) {
     useEffect(() => {
         retrieveInvoices();
         retrieveCostTypes();
-    }, [props.match.params.objectId]);
+    }, [objectId]);
 
     const retrieveCostTypes = () => {
         findAllCostTypes()

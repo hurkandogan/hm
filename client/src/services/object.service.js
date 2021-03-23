@@ -5,4 +5,7 @@ const findAllObjects = () => {
   return common_http.get("/api/objects", { headers: authHeader() });
 };
 
-export default findAllObjects;
+/* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
+export default {
+  findAllObjects
+};

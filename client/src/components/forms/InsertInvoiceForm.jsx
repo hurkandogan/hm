@@ -7,9 +7,9 @@ import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
 import { makeStyles } from '@material-ui/core/styles';
 import InvoiceService from '../../services/invoice.service';
-import findAllObjects from "../../services/object.service";
 import { InvoiceInput } from "../custom_hooks/InvoiceInput";
-
+import { connect } from 'react-redux';
+import { getObjects } from '../../redux/actions/objectAction';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -22,20 +22,15 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function InsertInvoiceForm() {
+function InsertInvoiceForm(props) {
     const classes = useStyles();
-    const [objectsList, setObject] = useState([]);
     const [formData, changeHandler] = InvoiceInput();
 
     useEffect(() => {
-        objectData();
+        props.getObjects();
     }, []);
 
-    const objectData = () => {
-        findAllObjects()
-            .then(response => setObject(response.data))
-            .catch(err => console.log(err));
-    }
+
     const objectsSelectBox = (data) => {
         return (
             <MenuItem key={data.id} value={data.id}>{data.name}</MenuItem>
@@ -82,7 +77,8 @@ function InsertInvoiceForm() {
                         onChange={changeHandler}
                     >
                         <MenuItem disabled key={0} value={''}>Choose an Object</MenuItem>
-                        {objectsList.map(objectsSelectBox)}
+                        {console.log(props.objects)}
+                        {props.objects.map(objectsSelectBox)}
                     </Select>
                 </FormControl>
                 <FormControl className={classes.formControl}>
@@ -143,4 +139,10 @@ function InsertInvoiceForm() {
     );
 }
 
-export default InsertInvoiceForm;
+const mapStateToProps = state => {
+    return {
+        objects: state.objects
+    };
+};
+
+export default connect(mapStateToProps, { getObjects })(InsertInvoiceForm);

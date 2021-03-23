@@ -1,25 +1,20 @@
-import React, { useState } from 'react';
+import React, {useEffect} from 'react';
 import { Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 // Components
 import Header from './components/shared/Header';
 import Sidebar from './components/navigation/Sidebar';
 import Dashboard from './components/Dashboard';
 import InvoiceTable from './components/invoices/InvoiceTable';
-import AuthService from './services/authorization/auth.service';
-// import TextField from '@material-ui/core/TextField';
-// import Button from '@material-ui/core/Button';
-
-//import Dashboard from "./components/Dashboard";
 import { makeStyles } from '@material-ui/core/styles';
+
+import { connect } from 'react-redux';
+import { getObjects } from './redux/actions/objectAction';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-    },
-    login: {
-        margin: 'calc(10%)',
-        marginLeft: '50px',
     },
     toolbar: theme.mixins.toolbar,
     content: {
@@ -29,39 +24,30 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function App() {
+function App(props) {
     const classes = useStyles();
-
-    const [loginData, setLoginData] = useState({
-        mail: "",
-        password: ""
-    });
-
-    const changeHandler = (event) => {
-        const { name, value } = event.target;
-        setLoginData(prevValue => {
-            return {
-                ...prevValue,
-                [name]: value
-            }
-        })
-    }
-
+    
     return (
-        <div>
-            <div className={classes.root}>
+        <div className={classes.root}>
+            <Router>
                 <Header />
                 <Sidebar />
                 <main className={classes.content}>
-                    <div className={classes.toolbar}>
+                <div className={classes.toolbar}>
                         <Switch>
-                                <Route exact path={'/'} component={Dashboard} />
-                                <Route exact path={'/invoices/:objectId'} component={InvoiceTable} />       
+                            <Route exact path={'/'} render={ () => <Dashboard />} />
+                            <Route path={'/invoices/:objectId'} render={ () => <InvoiceTable />} />       
                         </Switch>
                     </div>
                 </main>
+                </Router>
             </div>
-        </div>
   );
 }
-export default App;
+
+const mapStateToProps = state => {
+    return {
+        objects: state.objects
+    };
+}
+export default connect(mapStateToProps, { getObjects })(App);
