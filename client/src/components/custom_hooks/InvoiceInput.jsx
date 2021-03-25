@@ -9,7 +9,7 @@ export const InvoiceInput = () => {
         firm: '',
         description: '',
         total: '',
-        payment: '',
+        payment: 0,
         invoiceLink: ''
     });
 
@@ -17,5 +17,19 @@ export const InvoiceInput = () => {
         const { name, value } = event.target;
         setInputs({ ...inputs, [name]: value });
     };
-    return [inputs, changeHandler];
+
+    const clearForm = () => {
+        setInputs({
+            objectId: '',
+            costTypeId: '',
+            date: '',
+            firm: '',
+            description: '',
+            total: '',
+            payment: 0,
+            invoiceLink: ''
+        });
+    };
+
+    return [inputs, changeHandler, clearForm];
 };
