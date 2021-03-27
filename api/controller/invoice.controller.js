@@ -1,15 +1,56 @@
 const Sequelize = require('sequelize');
 const { sequelize } = require('../model/connection');
 const db = require('../model/connection');
+const pagination = require ('../helpers/pagination');
 const Invoice = db.invoices;
 const Object = db.objects;
 const CostType = db.costTypes;
 
 // Select
 exports.getAllInvoices = (req, res) => {
-    Invoice.findAll({ include: [Object, CostType] })
-        .then( data => {
-            res.status(200).send(data)
+    const { objectId, page, rowsPerPage } = req.query;
+    const { limit, offset } = pagination.getPagination(page, rowsPerPage);
+
+    Invoice.findAndCountAll({
+        where: {
+            objectId: objectId
+        },
+        attributes: [
+            'id',
+            'objectId',
+            'costTypeId',
+            'date',
+            'firm',
+            'description',
+            'total',
+            'payment',
+            'invoiceLink',
+        ],
+        include: {
+            model: Object,
+            attributes: [
+                'name',
+                'objectType'
+            ]
+        },
+        include: {
+            model: CostType,
+            attributes:[
+                'id',
+                'name',
+                'objectType'
+            ]
+        },
+        order: [
+            ['date', 'DESC'],
+            ['createdAt', 'DESC']
+        ],
+        limit,
+        offset
+    })
+        .then(data => {
+            const response = pagination.getPagingData(data, page, limit);
+            res.status(200).send(response);
         })
         .catch(err => {
             res.status(500).send({
@@ -52,6 +93,10 @@ exports.getObjectInvoices = (req, res) => {
                         'objectType'
                 ]
                 },
+                order: [
+                    ['date', 'DESC'],
+                    ['createdAt', 'DESC']
+                ],
             }
         ],
     })

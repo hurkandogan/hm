@@ -1,7 +1,7 @@
 import common_http from './common_http';
 
-const findInvoices = (objectId) => {
-    return common_http.get("/api/invoices/" + objectId);
+const findInvoices = (params) => {
+    return common_http.get(`/api/invoices/`, {params});
 }
 
 const insertInvoice = (data) => {
