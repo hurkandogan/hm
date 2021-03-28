@@ -11,6 +11,8 @@ exports.getAllInvoices = (req, res) => {
     const { objectId, page, rowsPerPage } = req.query;
     const { limit, offset } = pagination.getPagination(page, rowsPerPage);
 
+    console.log('limit' + limit + ' offset' + offset);
+
     Invoice.findAndCountAll({
         where: {
             objectId: objectId
@@ -49,6 +51,7 @@ exports.getAllInvoices = (req, res) => {
         offset
     })
         .then(data => {
+            console.log(data);
             const response = pagination.getPagingData(data, page, limit);
             res.status(200).send(response);
         })

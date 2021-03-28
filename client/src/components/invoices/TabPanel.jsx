@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import Invoice from "./Invoice";
 import InvoiceService from '../../services/invoice.service';
 import { lighten, makeStyles } from '@material-ui/core/styles';
@@ -9,11 +8,14 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
+import Pagination from '@material-ui/lab/Pagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
 
 const useToolbarStyles = makeStyles((theme) => ({
     root: {
@@ -46,17 +48,6 @@ const useStyles = makeStyles((theme) => ({
     table: {
         minWidth: 750,
     },
-    visuallyHidden: {
-        border: 0,
-        clip: 'rect(0 0 0 0)',
-        height: 1,
-        margin: -1,
-        overflow: 'hidden',
-        padding: 0,
-        position: 'absolute',
-        top: 20,
-        width: 1,
-    },
 }));
 
 const headCells = [
@@ -66,12 +57,7 @@ const headCells = [
     { id: '3', label: 'Total' },
 ];
 
-function EnhancedTableHead(props) {
-    const { classes, order, orderBy, rowCount, onRequestSort } = props;
-    const createSortHandler = (property) => (event) => {
-        onRequestSort(event, property);
-    };
-
+function EnhancedTableHead() {
     return (
         <TableHead>
             <TableRow>
@@ -81,19 +67,9 @@ function EnhancedTableHead(props) {
                         key={headCell.id}
                         align={'left'}
                         padding={'default'}
-                        sortDirection={orderBy === headCell.id ? order : false}
                     >
-                        <TableSortLabel
-                            active={orderBy === headCell.id}
-                            direction={orderBy === headCell.id ? order : 'asc'}
-                            onClick={createSortHandler(headCell.id)}
-                        >
+                        <TableSortLabel>
                             {headCell.label}
-                            {orderBy === headCell.id ? (
-                                <span className={classes.visuallyHidden}>
-                                    {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                                </span>
-                            ) : null}
                         </TableSortLabel>
                     </TableCell>
                 ))}
@@ -102,26 +78,14 @@ function EnhancedTableHead(props) {
     );
 }
 
-EnhancedTableHead.propTypes = {
-    classes: PropTypes.object.isRequired,
-    onRequestSort: PropTypes.func.isRequired,
-    order: PropTypes.oneOf(['asc', 'desc']).isRequired,
-    orderBy: PropTypes.string.isRequired,
-    rowCount: PropTypes.number.isRequired,
-};
-
-
-
 const EnhancedTableToolbar = (props) => {
     const classes = useToolbarStyles();
-    const { numSelected } = props;
 
     return (
         <Toolbar>
             <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
                 {props.objectName}
             </Typography>
-
             <Typography title="Delete">
                 Total: {props.objectTotal} €
             </Typography>
@@ -129,16 +93,15 @@ const EnhancedTableToolbar = (props) => {
     );
 };
 
-EnhancedTableToolbar.propTypes = {
-    numSelected: PropTypes.number.isRequired,
-};
-
 
 const TabPanel = (props) => {
     const classes = useStyles();
     const objectId = useState(props.objectId);
-    const [page, setPage] = useState(1);
+    const [rowsCount, setRowsCount] = useState(0);
+    const [pageCount, setPageCount] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(5);
+
     const [objectData, setObjectData] = useState({
         objectName: '',
         objecttTotal: 0,
@@ -147,17 +110,17 @@ const TabPanel = (props) => {
 
     useEffect(() => {
         retrieveInvoices();
-    }, [props.objectId]);
+    }, [props.objectId, currentPage, rowsPerPage]);
 
 
     const retrieveInvoices = () => {
-        const params = getRequestParams(objectId[0].objectId, page, rowsPerPage, setRowsPerPage);
-
+        const params = getRequestParams(objectId[0].objectId, currentPage, rowsPerPage);
 
         InvoiceService.findInvoices(params)
             .then(response => response.data)
             .then(async data => {
-                await setPage(data.totalPages);
+                await setPageCount(data.totalPages);
+                await setRowsCount(data.totalItems);
                 await setObjectData({
                     invoices: data.items,
                     objectName: 'Test',
@@ -170,7 +133,7 @@ const TabPanel = (props) => {
     const getRequestParams = (objectId, page, rowsPerPage) => {
         let params = {};
         if (objectId) { params["objectId"] = objectId; }
-        if (objectId) { params["page"] = page; }
+        if (objectId) { params["page"] = currentPage - 1; }
         if (objectId) { params["rowsPerPage"] = rowsPerPage; }
         return params;
     }
@@ -182,12 +145,12 @@ const TabPanel = (props) => {
 
 
     const handleChangePage = (event, newPage) => {
-        setPage(newPage);
+        setCurrentPage(newPage);
     };
 
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0);
+        setCurrentPage(1);
     };
 
     return (
@@ -203,22 +166,29 @@ const TabPanel = (props) => {
                     >
                         <EnhancedTableHead
                             classes={classes}
-                            rowCount={objectData.invoices.length}
+                            rowCount={rowsCount}
                         />
                         <TableBody>
                             {objectData.invoices.map(iterateAndFilterInvoices)}
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <TablePagination
-                    rowsPerPageOptions={[5, 10, 25]}
-                    component="div"
-                    count={objectData.invoices.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onChangePage={handleChangePage}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
-                />
+                <Pagination count={pageCount} page={currentPage} onChange={handleChangePage} rowsPerPage={rowsPerPage} color="secondary" />
+                <InputLabel htmlFor="rows-per-page">Rows Per Page</InputLabel>
+                <Select
+                    native
+                    value={rowsPerPage}
+                    onChange={handleChangeRowsPerPage}
+                    inputProps={{
+                        name: 'Rows',
+                        id: 'rows-per-page',
+                    }}
+                >
+                    <option aria-label="None" value="" />
+                    <option value={5}>5</option>
+                    <option value={10}>10</option>
+                    <option value={25}>25</option>
+                </Select>
             </Paper>
         </div>
     );
