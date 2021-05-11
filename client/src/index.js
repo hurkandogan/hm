@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import 'bootstrap/dist/css/bootstrap.css';
+import './custom.css';
 import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { reducer } from './redux/reducers/index';
@@ -12,7 +13,6 @@ const store = createStore(reducer, applyMiddleware(thunk));
 ReactDOM.render(
      <React.StrictMode>
         <Provider store={store}>
-            <CssBaseline />
             <App />
         </Provider>
      </React.StrictMode>,

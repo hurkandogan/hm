@@ -4,25 +4,24 @@ services:
   api:
     image: node:15.10
     command: sh -c "npm install && npm start"
+    networks:
+      - hm
     ports:
       - 5000:5000
     links:
-      - mysql
+      - postgres
     depends_on:
-      - mysql
+      - postgres
     working_dir: /hm
     volumes:
       - type: bind
         source: ./
         target: /hm
-    environment:
-      - MYSQL_HOST=mysql
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=secret
-      - MYSQL_DB=hugos
   client:
     image: node:15.10
     command: sh -c "npm install && npm start"
+    networks:
+      - hm
     ports:
       - 3000:3000
     environment:
@@ -36,20 +35,30 @@ services:
       - type: bind
         source: ./client
         target: /hm/client
-  adminer:
-    image: adminer:latest
-    restart: always
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    networks:
+      - hm
+    links: 
+      - postgres
     depends_on:
-      - mysql
+      - postgres
     ports:
-      - 8080:8080
-  mysql:
-    image: mysql:5.7
+      - 8080:80
+    logging: 
+      driver: none
+    environment: 
+      - PGADMIN_DEFAULT_EMAIL=dogan.hurkan@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+  postgres:
+    image: postgres:13.2-alpine
+    networks:
+      - hm
     volumes:
-      - hm-app-mysql-data:/var/lib/mysql
+      - pg-data:/var/lib/postgresql/data
     environment:
-      - MYSQL_ROOT_PASSWORD=secret
-      - MYSQL_DATABASE=hugos
-
+      - POSTGRES_PASSWORD=admin
 volumes:
-  hm-app-mysql-data:
+  pg-data:
+networks:
+  hm:

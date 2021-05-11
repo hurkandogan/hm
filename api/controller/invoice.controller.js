@@ -51,7 +51,6 @@ exports.getAllInvoices = (req, res) => {
         offset
     })
         .then(data => {
-            console.log(data);
             const response = pagination.getPagingData(data, page, limit);
             res.status(200).send(response);
         })

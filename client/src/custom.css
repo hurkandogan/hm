@@ -1,0 +1,27 @@
+
+/* Globals */
+
+body {
+    background-color: #828282;
+}
+
+/*Sidebar*/
+
+.nav-link{
+    width: 90%!important;
+    margin: 0.3rem 0.75rem;
+        
+}
+
+.nav-link svg{
+    margin-left: 0.5rem;
+    margin-right: 0.2rem;
+    font-size: 1.1rem;
+    width: 1.6rem;
+    text-align: center;
+}
+.nav-sidebar .nav-link p {
+    display: inline;
+    margin: 0;
+    white-space: normal;
+}

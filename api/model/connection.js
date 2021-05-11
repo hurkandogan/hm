@@ -31,7 +31,6 @@ const db = {};
 db.sequelize = sequelize;
 
 db.users = require('./user.model')(sequelize);
-//db.roles = require('./role.model')(sequelize);
 db.objects = require('./object.model')(sequelize);
 db.costTypes = require ('./costTypes.model')(sequelize);
 db.invoices = require('./invoice.model')(sequelize);
@@ -46,16 +45,13 @@ db.invoices.belongsTo(db.costTypes, { foreignKey: 'costTypeId' });
 // Sessions storage
 db.sessionStorage = require('./session_store.model')(sequelize);
 
-// TODO: Roles implementation is needed!
-//db.roles.hasMany(db.users, { as: "users"});
-
 // Connection Test
 const connectionTest = async () => {
     try {
         await sequelize.authenticate();
         console.log("Database connection established.");
 
-        await sequelize.sync({ alter: false, force: false });
+        //await sequelize.sync({ alter: false, force: false });
         //console.log("Database model synchronization is completed.");
     } catch (error) {
         console.log(error);

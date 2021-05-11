@@ -4,7 +4,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon -L server.js"
+    "start": "nodemon --ignore 'client/' -L server.js"
   },
   "keywords": [],
   "author": "hurkandogan",
@@ -22,6 +22,8 @@
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.2.5",
     "npm": "^7.6.0",
+    "pg": "^8.6.0",
+    "pg-hstore": "^2.3.3",
     "sequelize": "^6.5.0"
   },
   "devDependencies": {
