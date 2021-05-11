@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import {
   FaBars,
   FaSearch,
@@ -18,12 +19,9 @@ const TopNav = () => {
             <FaBars />
         </a>
       </li>
-      <li className="nav-item d-none d-sm-inline-block">
+      {/* <li className="nav-item d-none d-sm-inline-block">
         <a href="#" className="nav-link">Test</a>
-      </li>
-      <li className="nav-item d-none d-sm-inline-block">
-        <a href="#" className="nav-link">Test</a>
-      </li>
+      </li> */}
     </ul>
 
     {/* Right navbar links */}
@@ -63,26 +61,26 @@ const TopNav = () => {
         <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li className="nav-header">General</li>        
           <li className="nav-item menu-open">
-            <a href="#" className="nav-link active">
+                  <NavLink to={"/"} className="nav-link" activeClassName="active">
               <FaTachometerAlt />
               <p>
                 Dashboard  
               </p>
-            </a>
+            </NavLink>
               <ul className="nav nav-treeview">
               <li className="nav-header">Artworks</li>
               <li className="nav-item">
-                <a href="./artworks" className="nav-link">
+                <a href="/artworks" className="nav-link">
                   <BsCircle />
                   <p>Artworks</p>
                 </a>
               </li>
               <li className="nav-header">House Management</li>
               <li className="nav-item">
-                <a href="#" className="nav-link">
+                <NavLink to={"/artwork"} className="nav-link" activeClassName="active">
                   <BsCircle />
                   <p>Soon!</p>
-                </a>
+                </NavLink>
               </li>
             </ul>
           </li>  
