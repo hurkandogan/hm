@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import TopNav from "./components/TopNav";
 import Artwork from "./components/artwork/Artwork";
+import Login from "./components/auth/Login";
 
 // Redux
 import { connect } from 'react-redux';
@@ -13,9 +14,12 @@ function App(props) {
     return (
         <div>
             <Router>
-                < TopNav />
                 <Switch>
-                    <Route exact path={'/'} />
+                <Route exact path="/">
+                    <Login />
+                    </Route>
+                
+                    < TopNav />
                     <Route path={'/artwork'} component={Artwork} />
                 </Switch>
             </Router>

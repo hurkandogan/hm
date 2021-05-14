@@ -3,7 +3,7 @@ const User = db.users;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
-exports.signup = (req, res) => {
+const signup = (req, res) => {
 
     const newUserData = {
         firstName: req.body.firstName,
@@ -11,7 +11,6 @@ exports.signup = (req, res) => {
         mail: req.body.mail,
         password: bcrypt.hashSync(req.body.password, 8),
         roleId: 'admin'
-        // TODO: roleId should change after the new roles are created.
     }
 
     User.create(newUserData)
@@ -31,7 +30,7 @@ exports.signup = (req, res) => {
         });
 };
 
-exports.signin = (req, res) => {
+const signin = (req, res) => {
     const { mail, password } = req.body;
 
     User.findOne({
@@ -40,42 +39,45 @@ exports.signin = (req, res) => {
             'password',
             'firstName',
             'lastName',
-            'mail',
-            'roleId'
-
+            'mail'
         ],
         where: {
             mail: mail
         },
     })
         .then(user => {
-            // Check existing user
+            
             if (!user) {
                 return res.status(404).send({ message: "User is not found!" });
             }
-            // Check password
-            bcrypt.compare(password, user.password)
-                .then(isMatch => {   
-                    if (!isMatch) {
-                        return res.status(401).send({ message: "Invalid Password!", login: false });
-                    } else {
-                        const sessUser = {
-                            id: user.id,
-                            firstName: user.firstName,
-                            lastName: user.lastName,
-                            mail: user.mail,
-                            login: true
-                        }
-                        req.session.user = sessUser;
-                        console.log(user.firstName + ' ' + user.lastName + ' signed in successfully.');
-                        res.status(200).send(sessUser);
-                    }
+
+            let isPasswordValid = bcrypt.compareSync(
+                password,
+                user.password);
+            
+            if (!isPasswordValid) {
+                return res.status(401).send({
+                    message: "Invalid password",
+                    accessToken: null
                 });
+            }
+
+            let token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+                expiresIn: 86400
+            })
+                
+            return res.status(200).send({
+                id: user.id,
+                username: user.username,
+                mail: user.mail,
+                accessToken: token
+                })
+            
         })
         .catch(err => res.status(500).send({ message: err }));
 };
 
-exports.signout = (req, res) => {
+const signout = (req, res) => {
     req.session.destroy((err) => {
         if (!err) {
             res.clearCookie("hm_auth");
@@ -85,3 +87,11 @@ exports.signout = (req, res) => {
         }
     });
 }
+
+const authController = {
+    signup: signup,
+    signin: signin,
+    signout: signout
+}
+
+module.exports = authController;

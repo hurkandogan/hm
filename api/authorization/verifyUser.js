@@ -15,7 +15,7 @@ const verifyToken = (req, res, next) => {
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
     if (err) {
       return res.status(401).send({
-        message: "Unauthorized!" // Forbidden
+        message: "Unauthorized!"
       });
     }
     req.userId = decoded.id;
@@ -23,4 +23,25 @@ const verifyToken = (req, res, next) => {
   });
 };
 
-module.exports = verifyToken;
+const isUser = (req, res, next) => {
+  User.findByPk(req.userId)
+    .then(response => {
+      if (response) {
+        return res.status(200).send(true);
+      }
+    })
+    .catch(err => res.status(500).send({
+      error: error,
+      message: "A server error occured."
+  }))
+  return res.status(401).send({
+    message: "Unauthorized"
+  })
+};
+
+const auth = {
+  verifyToken: verifyToken,
+  isUser: isUser
+}
+
+module.exports = auth;
