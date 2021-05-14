@@ -4,8 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import Header from './shared/Header';
-import Sidebar from './navigation/Sidebar';
 
 function Dashboard() {
 
@@ -46,8 +44,6 @@ function Dashboard() {
     };
     return (
         <div>
-            <Header />
-            <Sidebar />
             {objects.map(loadObjectCards)}
         </div>
     );

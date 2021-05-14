@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import Invoice from "./Invoice";
-import InvoiceService from '../../services/invoice.service';
+
 import { lighten, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
 import Pagination from '@material-ui/lab/Pagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
@@ -108,27 +106,27 @@ const TabPanel = (props) => {
         invoices: []
     });
 
-    useEffect(() => {
-        retrieveInvoices();
-    }, [props.objectId, currentPage, rowsPerPage]);
+    // useEffect(() => {
+    //     retrieveInvoices();
+    // }, [props.objectId, currentPage, rowsPerPage]);
 
 
-    const retrieveInvoices = () => {
-        const params = getRequestParams(objectId[0].objectId, currentPage, rowsPerPage);
+    // const retrieveInvoices = () => {
+    //     const params = getRequestParams(objectId[0].objectId, currentPage, rowsPerPage);
 
-        InvoiceService.findInvoices(params)
-            .then(response => response.data)
-            .then(async data => {
-                await setPageCount(data.totalPages);
-                await setRowsCount(data.totalItems);
-                await setObjectData({
-                    invoices: data.items,
-                    objectName: 'Test',
-                    objecttTotal: 0
-                });
-            })
-            .catch(err => console.log(err))
-    };
+    //     InvoiceService.findInvoices(params)
+    //         .then(response => response.data)
+    //         .then(async data => {
+    //             await setPageCount(data.totalPages);
+    //             await setRowsCount(data.totalItems);
+    //             await setObjectData({
+    //                 invoices: data.items,
+    //                 objectName: 'Test',
+    //                 objecttTotal: 0
+    //             });
+    //         })
+    //         .catch(err => console.log(err))
+    // };
 
     const getRequestParams = (objectId, page, rowsPerPage) => {
         let params = {};
@@ -138,9 +136,9 @@ const TabPanel = (props) => {
         return params;
     }
 
-    const iterateAndFilterInvoices = (data) => {
-        return <Invoice key={data.id} invoice={data} />
-    };
+    // const iterateAndFilterInvoices = (data) => {
+    //     return <Invoice key={data.id} invoice={data} />
+    // };
 
 
 
@@ -169,7 +167,7 @@ const TabPanel = (props) => {
                             rowCount={rowsCount}
                         />
                         <TableBody>
-                            {objectData.invoices.map(iterateAndFilterInvoices)}
+                            {/* {objectData.invoices.map(iterateAndFilterInvoices)} */}
                         </TableBody>
                     </Table>
                 </TableContainer>

@@ -1,10 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import { Switch, Route } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
+
+// Services
 import AuthService from "./services/authorization/auth.service";
-import TopNav from "./components/TopNav";
-import Artwork from "./components/artwork/Artwork";
+
+// Components
 import Login from "./components/auth/Login";
+import TopNav from "./components/shared/TopNav";
+import Sidebar from "./components/shared/Sidebar";
+import Artwork from "./components/artwork/Artwork";
 
 // Redux
 import { connect } from 'react-redux';
@@ -28,6 +33,8 @@ function App() {
             ) : (
             <div>
                 <TopNav />
+                <Sidebar />
+                        
                 <Switch>
                     <Route exact path = {'/'} />
                     <Route exact path = {'/artwork'} component = {Artwork}/>
