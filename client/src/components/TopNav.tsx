@@ -6,8 +6,15 @@ import {
   FaTachometerAlt
 } from 'react-icons/fa';
 import { BsCircle } from 'react-icons/bs';
+import AuthService from '../services/authorization/auth.service';
 
 const TopNav = () => {
+  
+  const signout = () => {
+    AuthService.signout();
+    window.location.reload();
+  }
+
     return (
 <div>
   {/* Navbar */}
@@ -27,6 +34,7 @@ const TopNav = () => {
     {/* Right navbar links */}
     <ul className="navbar-nav ml-auto">
       <li className="nav-item">
+              <button className="nav-link" onClick={signout}>Logout</button>
       </li>
     </ul>
   </nav>

@@ -11,6 +11,11 @@ body {
     margin: 150px auto;
     text-align: center;
 }
+.spinner-border {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-left: 10px;
+}
 
 /*Sidebar*/
 

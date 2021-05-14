@@ -32,7 +32,6 @@ const signup = (req, res) => {
 
 const signin = (req, res) => {
     const { mail, password } = req.body;
-
     User.findOne({
         attributes: [
             'id',
@@ -68,7 +67,8 @@ const signin = (req, res) => {
                 
             return res.status(200).send({
                 id: user.id,
-                username: user.username,
+                firstName: user.firstName,
+                lastName: user.lastName,
                 mail: user.mail,
                 accessToken: token
                 })
@@ -78,14 +78,9 @@ const signin = (req, res) => {
 };
 
 const signout = (req, res) => {
-    req.session.destroy((err) => {
-        if (!err) {
-            res.clearCookie("hm_auth");
-            res.status(200).send({message: "Signed out successfully!"});
-        } else {
-            console.log("auth.controller#signout: " + err);
-        }
-    });
+    return {
+        message: "Signout"
+    };
 }
 
 const authController = {

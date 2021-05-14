@@ -42,9 +42,6 @@ db.invoices.belongsTo(db.objects, { foreignKey: 'objectId' });
 db.costTypes.hasMany(db.invoices, { foreignKey: 'costTypeId' });
 db.invoices.belongsTo(db.costTypes, { foreignKey: 'costTypeId' });
 
-// Sessions storage
-db.sessionStorage = require('./session_store.model')(sequelize);
-
 // Connection Test
 const connectionTest = async () => {
     try {
