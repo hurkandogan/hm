@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import { Switch, Route } from "react-router-dom";
-import { BrowserRouter as Router } from "react-router-dom";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route
+} from "react-router-dom";
 
 // Services
 import AuthService from "./services/authorization/auth.service";
@@ -9,6 +12,7 @@ import AuthService from "./services/authorization/auth.service";
 import Login from "./components/auth/Login";
 import TopNav from "./components/shared/TopNav";
 import Sidebar from "./components/shared/Sidebar";
+import Dashboard from "./components/content/Dashboard";
 import Artwork from "./components/artwork/Artwork";
 
 // Redux
@@ -29,17 +33,20 @@ function App() {
     return (
         <Router>
             {!currentUser.accessToken ? (
-                <Login />
+                <Route exact path={'/login'}>
+                    <Login />
+                </Route>
             ) : (
             <div>
                 <TopNav />
-                <Sidebar />
-                        
-                <Switch>
-                    <Route exact path = {'/'} />
-                    <Route exact path = {'/artwork'} component = {Artwork}/>
-                </Switch>
+                <Sidebar />        
+                <div className="switch-wrapper">
+                            <Switch>
+                                <Route exact path={"/"} component={Dashboard} />
+                                <Route path = {'/artwork'} component = {Artwork}/>
+                            </Switch>
                 </div> 
+            </div> 
             )}
         </Router>
     );

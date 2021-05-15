@@ -4,7 +4,12 @@ import {
     FaSearch,
     FaTachometerAlt
 } from 'react-icons/fa';
-import { BsCircle } from 'react-icons/bs';
+import {
+    BsCircle,
+    BsShield,
+    BsWrench,
+    BsHouseDoor
+} from 'react-icons/bs';
 
 const Sidebar = () => {
     return (
@@ -33,30 +38,35 @@ const Sidebar = () => {
                     </div>
                 </div>
 
-                {/* <!-- Sidebar Menu --> */}
                 <nav className="mt-2">
                     <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li className="nav-header">General</li>
                         <li className="nav-item menu-open">
                             <NavLink to={"/"} className="nav-link" activeClassName="active">
                                 <FaTachometerAlt />
-                                <p>
-                                    Dashboard
-                                </p>
+                                <p>Dashboard</p>
                             </NavLink>
                             <ul className="nav nav-treeview">
                                 <li className="nav-header">Artworks</li>
                                 <li className="nav-item">
-                                    <a href="/artworks" className="nav-link">
+                                    <NavLink to={"/artwork"} className="nav-link">
                                         <BsCircle />
                                         <p>Artworks</p>
-                                    </a>
+                                    </NavLink>
                                 </li>
                                 <li className="nav-header">House Management</li>
                                 <li className="nav-item">
-                                    <NavLink to={"/artwork"} className="nav-link" activeClassName="active">
-                                        <BsCircle />
-                                        <p>Soon!</p>
+                                    <NavLink to={"#"} className="nav-link" activeClassName="active">
+                                        <BsShield />
+                                        <p>Versicherungen</p>
+                                    </NavLink>
+                                    <NavLink to={"#"} className="nav-link" activeClassName="active">
+                                        <BsWrench />
+                                        <p>Renovierungskosten</p>
+                                    </NavLink>
+                                    <NavLink to={"#"} className="nav-link" activeClassName="active">
+                                        <BsHouseDoor />
+                                        <p>Berliner Str.</p>
                                     </NavLink>
                                 </li>
                             </ul>
