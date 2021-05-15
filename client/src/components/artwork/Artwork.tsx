@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
+import InsertArtwork from '../offcanvas/InsertArtwork';
+import {
+    BsPlusSquare
+    } from 'react-icons/bs';
 
 const Artwork = () => {
+
+    const [offCanvasToggle, setOffCanvasToggle] = useState(false);
+    
+    const offCanvasHandler = async () => setOffCanvasToggle(!offCanvasToggle);
+
     return (
         <div className="content-wrapper">
+            <InsertArtwork
+                offCanvasToggle={offCanvasToggle}
+                offCanvasHandler={offCanvasHandler} />
             <div className="content-header">
                 <div className="container-fluid">
                     <h1>Artwork</h1>
+                    <button className="btn btn-primary" onMouseUp={offCanvasHandler}><BsPlusSquare /></button>
                     <table className="table table-hover table-sm">
                         <thead>
                             <tr>
@@ -36,6 +49,7 @@ const Artwork = () => {
                             </tr>
                         </tbody>
                     </table>
+                    
                 </div>
             </div>
         </div>
