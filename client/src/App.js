@@ -39,7 +39,7 @@ function App() {
             ) : (
             <div>
                 <TopNav />
-                <Sidebar />        
+                        <Sidebar userInfo={currentUser} />
                 <div className="switch-wrapper">
                             <Switch>
                                 <Route exact path={"/"} component={Dashboard} />

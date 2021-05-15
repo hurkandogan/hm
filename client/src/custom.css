@@ -18,7 +18,16 @@ body {
 }
 
 /*Sidebar*/
-.nav-header{
+.copyright-text {
+    color: #FFF;
+    text-align: center;
+    border-bottom: 1px solid #4f5962;
+    padding: 10px 0;
+}
+.user-info{
+    color: #FFF;
+}
+.nav-header {
     padding-left: 0!important;
 }
 .nav-link svg {

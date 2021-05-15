@@ -16,7 +16,7 @@ const TopNav = () => {
       {/* Left navbar links */}
         <ul className="navbar-nav">
           <li className="nav-item">
-            <a className="nav-link" data-widget="pushmenu" href="#" role="button">
+            <a className="nav-link" data-widget="pushmenu" role="button">
             <FaBars />
             </a>
           </li>
@@ -28,7 +28,7 @@ const TopNav = () => {
     {/* Right navbar links */}
     <ul className="navbar-nav ml-auto">
       <li className="nav-item">
-          <button className="nav-link" onClick={signout}>Logout</button>
+          <button className="btn btn-outline-danger" onClick={signout}>Logout</button>
       </li>
     </ul>
   </nav>

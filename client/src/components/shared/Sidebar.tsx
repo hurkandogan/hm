@@ -10,20 +10,22 @@ import {
     BsWrench,
     BsHouseDoor
 } from 'react-icons/bs';
+import avatar from '../../sample_avatar.png';
 
-const Sidebar = () => {
+const Sidebar = (props) => {
+
     return (
         <aside className="main-sidebar sidebar-dark-primary elevation-4">
             {/* <img src="#" className="brand-image img-circle elevation-3" style={{opacity: '0.8'}} /> */}
-            <span className="brand-text font-weight-light">HugOS</span>
+            <p className="brand-text font-weight-light copyright-text">HugOS <small>0.0.1</small></p>
 
             <div className="sidebar">
-                <div className="user-panel mt-3 pb-3 mb-3 d-flex">
-                    {/* <div className="image">
-          <img src="#" className="img-circle elevation-2" />
-        </div> */}
+                <div className="user-panel mb-3 d-flex">
+                <div className="image">
+                    <img src={avatar} alt="Avatar" className="img-circle elevation-2" />
+            	</div> 
                     <div className="info">
-                        <a href="#" className="d-block">Hurkan Dogan</a>
+                        <p className="user-info">{props.userInfo.firstName + " " + props.userInfo.lastName}</p>
                     </div>
                 </div>
 
@@ -42,34 +44,36 @@ const Sidebar = () => {
                     <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li className="nav-header">General</li>
                         <li className="nav-item menu-open">
-                            <NavLink to={"/"} className="nav-link" activeClassName="active">
+                            <NavLink to={"/"} className="nav-link">
                                 <FaTachometerAlt />
                                 <p>Dashboard</p>
                             </NavLink>
-                            <ul className="nav nav-treeview">
-                                <li className="nav-header">Artworks</li>
-                                <li className="nav-item">
-                                    <NavLink to={"/artwork"} className="nav-link">
-                                        <BsCircle />
-                                        <p>Artworks</p>
-                                    </NavLink>
-                                </li>
-                                <li className="nav-header">House Management</li>
-                                <li className="nav-item">
-                                    <NavLink to={"#"} className="nav-link" activeClassName="active">
-                                        <BsShield />
-                                        <p>Versicherungen</p>
-                                    </NavLink>
-                                    <NavLink to={"#"} className="nav-link" activeClassName="active">
-                                        <BsWrench />
-                                        <p>Renovierungskosten</p>
-                                    </NavLink>
-                                    <NavLink to={"#"} className="nav-link" activeClassName="active">
-                                        <BsHouseDoor />
-                                        <p>Berliner Str.</p>
-                                    </NavLink>
-                                </li>
-                            </ul>
+                        </li>
+                        <li className="nav-header">Artworks</li>
+                        <li className="nav-item">
+                            <NavLink to={"/artwork"} className="nav-link" activeClassName="active">
+                                <BsCircle />
+                                <p>Artworks</p>
+                            </NavLink>
+                        </li>
+                        <li className="nav-header">House Management (In Progress)</li>
+                        <li className="nav-item">
+                            <NavLink to={"#"} className="nav-link" activeClassName="active">
+                                <BsShield />
+                                <p>Versicherungen</p>
+                            </NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink to={"#"} className="nav-link" activeClassName="active">
+                                <BsWrench />
+                                <p>Renovierungskosten</p>
+                            </NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink to={"#"} className="nav-link" activeClassName="active">
+                                <BsHouseDoor />
+                                <p>Berliner Str.</p>
+                            </NavLink>
                         </li>
                     </ul>
                 </nav>
