@@ -1,7 +1,7 @@
-import common_http from './common_http';
+import api from './common_http';
 
 const loadDashboardTotals = () => {
-    return common_http.get("/api/dashboard");
+    return api.get("/api/dashboard");
 }
 
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */

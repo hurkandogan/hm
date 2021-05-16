@@ -10,7 +10,7 @@ import {
     BsWrench,
     BsHouseDoor
 } from 'react-icons/bs';
-import avatar from '../../sample_avatar.png';
+import avatar from '../../sample_avatar.jpg';
 
 const Sidebar = (props) => {
 

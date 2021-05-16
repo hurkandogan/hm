@@ -40,6 +40,7 @@ require("./api/routes/index")(app);
 require('./api/routes/objects')(app);
 require("./api/routes/invoices")(app);
 require("./api/routes/costTypes")(app);
+require("./api/routes/artwork")(app);
 
 app.listen(PORT, function() {
     console.log("Server is alive on port: " + PORT);

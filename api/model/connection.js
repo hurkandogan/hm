@@ -34,6 +34,7 @@ db.users = require('./user.model')(sequelize);
 db.objects = require('./object.model')(sequelize);
 db.costTypes = require ('./costTypes.model')(sequelize);
 db.invoices = require('./invoice.model')(sequelize);
+db.artwork = require('./artwork.model')(sequelize);
 
 // Foreign Keys
 db.objects.hasMany(db.invoices,{ foreignKey: 'objectId' });
@@ -48,8 +49,8 @@ const connectionTest = async () => {
         await sequelize.authenticate();
         console.log("Database connection established.");
 
-        //await sequelize.sync({ alter: false, force: false });
-        //console.log("Database model synchronization is completed.");
+        await sequelize.sync({ alter: true, force: false });
+        console.log("Database model synchronization is completed.");
     } catch (error) {
         console.log(error);
     }

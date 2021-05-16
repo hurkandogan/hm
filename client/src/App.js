@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 
 // Services
-import AuthService from "./services/authorization/auth.service";
+import AuthService from "./connection/auth.service";
 
 // Components
 import Login from "./components/auth/Login";

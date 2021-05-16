@@ -1,4 +1,4 @@
-import ObjectService from '../../services/object.service';
+import ObjectService from '../../connection/object.service';
 
 export const getObjects = () => dispatch => {
     dispatch({type: "GET_OBJECTS_START"});

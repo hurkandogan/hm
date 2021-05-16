@@ -1,7 +1,7 @@
-import common_http from '../common_http';
+import api from './common_http';
 
 const register = (firstName, lastName, mail, password) => {
-  return common_http.post( "/api/signup", {
+  return api.post( "/api/signup", {
       firstName,
       lastName,
       mail,
@@ -10,7 +10,7 @@ const register = (firstName, lastName, mail, password) => {
 };
 
 const signin = (data) => {
-    return common_http.post("/api/signin", data)
+    return api.post("/api/signin", data)
         .then((response) => {
             if (response.data.accessToken) {
                 localStorage.setItem("user", JSON.stringify(response.data));
@@ -27,7 +27,6 @@ const signout = () => {
 const getCurrentUser = () => {
     return JSON.parse(localStorage.getItem("user") || '{}');
 };
-
 
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {

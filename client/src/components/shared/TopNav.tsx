@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaBars } from 'react-icons/fa';
-import AuthService from '../../services/authorization/auth.service';
+import AuthService from '../../connection/auth.service';
 
 const TopNav = () => {
   

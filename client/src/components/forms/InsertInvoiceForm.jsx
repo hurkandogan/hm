@@ -6,7 +6,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
 import { makeStyles } from '@material-ui/core/styles';
-import InvoiceService from '../../services/invoice.service';
+import InvoiceService from '../../connection/invoice.service';
 import { InvoiceInput } from "../custom_hooks/InvoiceInput";
 import { connect } from 'react-redux';
 import { getObjects } from '../../redux/actions/objectAction';
