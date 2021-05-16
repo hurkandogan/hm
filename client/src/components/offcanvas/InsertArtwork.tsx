@@ -28,8 +28,7 @@ const InsertArtwork = (props) => {
         const { name, value } = event.target;
         setArtwork({ ...artwork, [name]: value });
     };
-
-
+    
     const submitArtwork = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -59,6 +58,7 @@ const InsertArtwork = (props) => {
                             id="artworkName"
                             placeholder="Artwork Name"
                             autoComplete="off"
+                            value={artwork.artworkName}
                             onChange={changeHanler} />
                     </div>
                     <div className="col">
@@ -69,6 +69,7 @@ const InsertArtwork = (props) => {
                             id="artistName"
                             placeholder="Artist Name"
                             autoComplete="off"
+                            value={artwork.artistName}
                             onChange={changeHanler} />
                     </div>
                 </div>
@@ -80,6 +81,8 @@ const InsertArtwork = (props) => {
                             name="sizes"
                             id="sizes"
                             placeholder="Sizes"
+                            autoComplete="off"
+                            value={artwork.sizes}
                             onChange={changeHanler} />
                     </div>
                     <div className="col">
@@ -90,6 +93,7 @@ const InsertArtwork = (props) => {
                             id="location"
                             placeholder="Location"
                             autoComplete="off"
+                            value={artwork.location}
                             onChange={changeHanler} />
                     </div>
                 </div>
@@ -102,6 +106,7 @@ const InsertArtwork = (props) => {
                             id="purchaseDate"
                             placeholder="Purchase Date"
                             autoComplete="off"
+                            value={artwork.purchaseDate}
                             onChange={changeHanler} />
                     </div>
                     <div className="col">
@@ -112,6 +117,7 @@ const InsertArtwork = (props) => {
                             id="purchaseLocation"
                             placeholder="Location of purchase"
                             autoComplete="off"
+                            value={artwork.purchaseLocation}
                             onChange={changeHanler} />
                     </div>
                 </div>
@@ -124,6 +130,7 @@ const InsertArtwork = (props) => {
                             id="price"
                             placeholder="Price in €"
                             autoComplete="off"
+                            value={artwork.price}
                             onChange={changeHanler} />
                     </div>
                     <div className="col">
@@ -134,6 +141,7 @@ const InsertArtwork = (props) => {
                             id="taxPrice"
                             placeholder="Tax"
                             autoComplete="off"
+                            value={artwork.taxPrice}
                             onChange={changeHanler} />
                     </div>
                     <div className="col">
@@ -144,6 +152,7 @@ const InsertArtwork = (props) => {
                             id="transportPrice"
                             placeholder="Transport"
                             autoComplete="off"
+                            value={artwork.transportPrice}
                             onChange={changeHanler} />
                     </div>
                 </div>
@@ -156,6 +165,7 @@ const InsertArtwork = (props) => {
                             id="framing"
                             placeholder="Transport"
                             autoComplete="off"
+                            value={artwork.framing}
                             onChange={changeHanler} />
                     </div>
                     <div className="col">
@@ -166,6 +176,7 @@ const InsertArtwork = (props) => {
                             id="arr"
                             placeholder="ARR"
                             autoComplete="off"
+                            value={artwork.arr}
                             onChange={changeHanler} />
                     </div>
                 </div>
@@ -175,6 +186,7 @@ const InsertArtwork = (props) => {
                         <textarea className="form-control"
                             name="artworkDesc"
                             id="artworkDesc"
+                            value={artwork.artworkDesc}
                             onChange={changeHanler} />
                     </div>
                     <div className="col">
@@ -182,6 +194,7 @@ const InsertArtwork = (props) => {
                         <textarea className="form-control"
                             name="notes"
                             id="notes"
+                            value={artwork.notes}
                             onChange={changeHanler} />
                     </div>
                 </div>

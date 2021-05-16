@@ -66,6 +66,8 @@ exports.selectArtworks = (req, res) => {
             })
         });
 };
+
+// TODO: Implementations
 exports.selectOneArtwork = (req, res) => { };
 exports.updateArtwork = (req, res) => { };
 exports.deleteArtwork = (req, res) => { };

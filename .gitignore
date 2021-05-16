@@ -27,6 +27,8 @@ client/yarn-error.log*
 
 db
 
+todolist.txt
+
 # env
 .env
 node_modules

@@ -1,4 +1,10 @@
-
+/*
+* Content:
+* - Globals
+* - Sidebar
+* - Off-Canvas
+* 
+*/
 /* Globals */
 
 body {
@@ -42,7 +48,7 @@ body {
     margin: 0;
     white-space: normal;
 }
-
+/* Off-Canvas */
 /* Position and sizing of burger button */
 .bm-burger-button {
     position: fixed;
