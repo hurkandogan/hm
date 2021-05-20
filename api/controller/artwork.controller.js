@@ -46,18 +46,18 @@ exports.createArtwork = (req, res) => {
 };
 
 exports.selectArtworks = (req, res) => {
-    const {
-        limit,
-        offset
-    } = pagination.getPagination(page, rowsPerPage);
+    // const {
+    //     limit,
+    //     offset
+    // } = pagination.getPagination(page, rowsPerPage);
 
     Artwork.findAndCountAll({
         order: [
                 ['purchase_date', 'DESC'],
                 ['createdAt', 'DESC']
             ],
-            limit,
-            offset
+            // limit,
+            // offset
     })
         .then(response => {
             res.status(200).send({
@@ -67,7 +67,10 @@ exports.selectArtworks = (req, res) => {
         });
 };
 
+exports.updateArtwork = (req, res) => {
+    console.log(req.body);
+};
+
 // TODO: Implementations
 exports.selectOneArtwork = (req, res) => { };
-exports.updateArtwork = (req, res) => { };
 exports.deleteArtwork = (req, res) => { };

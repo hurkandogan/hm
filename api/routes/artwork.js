@@ -12,4 +12,6 @@ module.exports = function (app) {
     });
 
     app.post('/api/artwork', Artwork.createArtwork);
+    app.get('/api/artwork', Artwork.selectArtworks);
+    app.put('/api/artwork', Artwork.updateArtwork);
 };

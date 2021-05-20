@@ -50,6 +50,11 @@ body {
 }
 /* Off-Canvas */
 /* Position and sizing of burger button */
+.detail-text{
+    color: #fff;
+    background-color:rgba(0, 0, 0, 0.3);
+    padding: 5px;
+}
 .bm-burger-button {
     position: fixed;
     width: 36px;
