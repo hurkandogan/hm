@@ -3,7 +3,8 @@ import api from '../../connection/common_http';
 import InsertArtwork from '../offcanvas/InsertArtwork';
 import ArtworkDetail from '../offcanvas/ArtworkDetail';
 import {
-    BsPlusSquare
+    BsPlusSquare,
+    BsCloudDownload
     } from 'react-icons/bs';
 
 const Artwork = () => {
@@ -14,26 +15,9 @@ const Artwork = () => {
     const [offCanvasToggle, setOffCanvasToggle] = useState(false);
     const [offCanvasArtworkDetailToggle, setOffCanvasArtworkDetailToggle] = useState(false);
     const [selectedArtwork, setSelectedArtwork] = useState({} || null);
-    
-    const ARTWORK_INITIAL_VALUE = {
-        artwork_name: "",
-        artist_name: "",
-        sizes: "",
-        location: "",
-        purchase_date: "",
-        purchase_location: "",
-        price: "",
-        taxPrice: "",
-        transport_price: "",
-        arr: "",
-        framing: "",
-        artwork_desc: "",
-        notes: "",
-    };
 
     useEffect(() => {
         setLoading(true);
-        setSelectedArtwork(ARTWORK_INITIAL_VALUE);
         api.get('/api/artwork')
             .then(response => {
                 setArtworks(response.data.payload.rows);
@@ -62,14 +46,28 @@ const Artwork = () => {
             />
             <div className="content-header">
                 <div className="container-fluid">
-                    <h1>Artwork</h1>
-                    <button className="btn btn-primary" onMouseUp={offCanvasHandler}><BsPlusSquare /></button>
-                    <table className="table table-hover table-sm">
+                    <div className="row justify-content-between mb-3">
+                        <div className="col-6">
+                            <h1>Artwork</h1>
+                            <small>In Kai's Inventory there are {artworkCount} piece(s).</small>
+                        </div>
+                        <div className="col-6 btn-container">
+                            <button className="btn btn-primary" disabled={true}>
+                                <BsCloudDownload /> Download as PDF(<small>in Development</small>)
+                            </button>
+                            <button className="btn btn-primary"
+                                onMouseUp={offCanvasHandler}>
+                                <BsPlusSquare /> Add New Artwork
+                            </button>
+                        </div>
+                    </div>
+                    <table className="table table-striped table-hover table-sm">
                         <thead>
                             <tr>
                                 <th scope="col">Image</th>
                                 <th scope="col">Artwork</th>
                                 <th scope="col">Artist</th>
+                                <th scope="col">Location</th>
                                 <th scope="col">Price</th>
                             </tr>
                         </thead>
@@ -78,9 +76,10 @@ const Artwork = () => {
                                 artworks.map((el) => {
                                 return (
                                         <tr key={el.id} onMouseUp={() => offCanvasArtworkDetailHandler(el)}>
-                                        <th scope="row">No Image</th>
+                                        <th scope="row"><img src="https://picsum.photos/50/50" alt={el.artwork_name} /></th>
                                         <td>{el.artwork_name}</td>
                                         <td>{el.artist_name}</td>
+                                        <td>{el.location}</td>
                                         <td>{el.price} €</td>
                                     </tr>
                                 );

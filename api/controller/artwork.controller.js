@@ -53,7 +53,7 @@ exports.selectArtworks = (req, res) => {
 
     Artwork.findAndCountAll({
         order: [
-                ['purchase_date', 'DESC'],
+                ['purchase_date', 'ASC'],
                 ['createdAt', 'DESC']
             ],
             // limit,

@@ -13,6 +13,7 @@ const ArtworkDetail = (props) => {
         >
             <h3>Artwork Details</h3>
             <div className="container">
+            <img src="https://picsum.photos/100/100" alt={props.selectedArtwork.artwork_name ?? ""} />
             <div className="row mt-3">
                 <div className="col">
                     <h5>Artwork Name:</h5>

@@ -48,6 +48,14 @@ body {
     margin: 0;
     white-space: normal;
 }
+/* Artwork */
+.btn-container{
+    margin: 0;
+    text-align: right;
+}
+.btn-container .btn{
+    margin-left: 10px;
+}
 /* Off-Canvas */
 /* Position and sizing of burger button */
 .detail-text{
