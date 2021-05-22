@@ -3,7 +3,7 @@ version: "3.8"
 services:
   api:
     image: node:15.10
-    command: sh -c "npm install && npm start"
+    command: sh -c "npm install && dev start"
     networks:
       - hm
     ports:
