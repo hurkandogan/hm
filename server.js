@@ -2,8 +2,6 @@ const express = require('express');
 const body = require('body-parser');
 const cors = require('cors');
 const process = require('process');
-const session = require('express-session');
-const MySqlStore = require('express-mysql-session')(session);
 require('dotenv').config();
 
 // Port
@@ -18,7 +16,7 @@ app.use(cors({
     credentials: true
 }));
 
-// Static Files test 3
+// Static Files
 const environment = process.env.NODE_ENV;
 if (environment === 'prod') {
     console.log("Project is in production environment.");
