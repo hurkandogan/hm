@@ -18,7 +18,7 @@ app.use(cors({
     credentials: true
 }));
 
-// Static Files
+// Static Files test
 const environment = process.env.NODE_ENV;
 if (environment === 'prod') {
     console.log("Project is in production environment.");
