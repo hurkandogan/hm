@@ -28,7 +28,7 @@ if (environment === 'prod') {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     });
 } else {
-    console.log("Project is in development environment.")
+    console.log("Project is in development environment.");
 }
 
 app.use(body.urlencoded({extended: true}));
