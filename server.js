@@ -18,7 +18,7 @@ app.use(cors({
     credentials: true
 }));
 
-// Static Files
+// Static Files test 3
 const environment = process.env.NODE_ENV;
 if (environment === 'prod') {
     console.log("Project is in production environment.");
@@ -28,7 +28,7 @@ if (environment === 'prod') {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     });
 } else {
-    console.log("Project is in development environment.")
+    console.log("Project is in development environment.");
 }
 
 app.use(body.urlencoded({extended: true}));
