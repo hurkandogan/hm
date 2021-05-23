@@ -14,18 +14,18 @@ exports.createArtwork = (req, res) => {
 
     const newArtwork = {    
          id: null,
-         artwork_name: req.body.artworkName,
-         artist_name: req.body.artistName,
+         artwork_name: req.body.artwork_name,
+         artist_name: req.body.artist_name,
          sizes: req.body.sizes,
          location: req.body.location,
-         purchase_date: req.body.purchaseDate,
-         purchase_location: req.body.purchaseLocation,
+         purchase_date: req.body.purchase_date,
+         purchase_location: req.body.purchase_location,
          price: parseFloat(req.body.price),
-         tax_price: parseFloat(req.body.taxPrice),
-         transport_price: parseFloat(req.body.transportPrice),
+         tax_price: parseFloat(req.body.tax_price),
+         transport_price: parseFloat(req.body.transport_price),
          framing: parseFloat(req.body.framing),
          arr: req.body.arr,
-         artwork_desc: req.body.artworkDesc,
+         artwork_desc: req.body.artwork_desc,
          notes: req.body.notes,
     }
     
@@ -74,3 +74,4 @@ exports.updateArtwork = (req, res) => {
 // TODO: Implementations
 exports.selectOneArtwork = (req, res) => { };
 exports.deleteArtwork = (req, res) => { };
+exports.soldArtwork = (req, res) => { };
