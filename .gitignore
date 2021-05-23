@@ -32,3 +32,4 @@ todolist.txt
 # env
 .env
 .dockerignore
+hm_app.pem
