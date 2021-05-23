@@ -21,7 +21,7 @@ app.use(cors({
 // Static Files
 const environment = process.env.NODE_ENV;
 if (environment === 'prod') {
-    console.log("Project is in production environment.")
+    console.log("Project is in production environment.");
     const path = require('path');
     app.use(express.static(path.join(__dirname, 'client/build')));   
     app.get('*', (req, res) => {
