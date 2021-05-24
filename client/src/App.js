@@ -15,11 +15,6 @@ import Sidebar from "./components/shared/Sidebar";
 import Dashboard from "./components/content/Dashboard";
 import Artwork from "./components/artwork/Artwork";
 
-// Redux
-import { connect } from 'react-redux';
-import { getObjects } from './redux/actions/objectAction';
-
-
 function App() {
     const [currentUser, setCurrentUser] = useState({});
     
@@ -33,28 +28,23 @@ function App() {
     return (
         <Router>
             {!currentUser.accessToken ? (
-                <Route exact path={'/login'}>
+                <Route exact path={'/'}>
                     <Login />
                 </Route>
             ) : (
             <div>
                 <TopNav />
-                        <Sidebar userInfo={currentUser} />
+                <Sidebar userInfo={currentUser} />
+                
                 <div className="switch-wrapper">
-                            <Switch>
-                                <Route exact path={"/"} component={Dashboard} />
-                                <Route path = {'/artwork'} component = {Artwork}/>
-                            </Switch>
+                    <Switch>
+                        <Route exact path={"/"} component={Dashboard} />
+                        <Route path = {'/artwork'} component = {Artwork}/>
+                    </Switch>
                 </div> 
             </div> 
             )}
         </Router>
     );
 }
-
-const mapStateToProps = state => {
-    return {
-        objects: state.objects
-    };
-}
-export default connect(mapStateToProps, { getObjects })(App);
+export default App;

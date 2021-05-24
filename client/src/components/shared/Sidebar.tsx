@@ -58,19 +58,19 @@ const Sidebar = (props) => {
                         </li>
                         <li className="nav-header">House Management (In Progress)</li>
                         <li className="nav-item">
-                            <NavLink to={"#"} className="nav-link" activeClassName="active">
+                            <NavLink to={"/"} className="nav-link">
                                 <BsShield />
                                 <p>Versicherungen</p>
                             </NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink to={"#"} className="nav-link" activeClassName="active">
+                            <NavLink to={"/"} className="nav-link">
                                 <BsWrench />
                                 <p>Renovierungskosten</p>
                             </NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink to={"#"} className="nav-link" activeClassName="active">
+                            <NavLink to={"/"} className="nav-link" activeClassName="active">
                                 <BsHouseDoor />
                                 <p>Berliner Str.</p>
                             </NavLink>
