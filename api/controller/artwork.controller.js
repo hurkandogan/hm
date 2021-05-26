@@ -40,7 +40,7 @@ exports.createArtwork = (req, res) => {
         .catch((err) => {
             res.status(500).send({
                 result: "FAILED",
-                message: "costTypes.controller#create=> An error occured: " + err
+                message: "artwork.controller#create=> An error occured: " + err
             });
         });
 };
@@ -68,7 +68,48 @@ exports.selectArtworks = (req, res) => {
 };
 
 exports.updateArtwork = (req, res) => {
-    console.log(req.body);
+
+     if (!req.body.id || req.body.id === "") {
+         res.status(400).send({
+             result: "FAILED",
+             message: "Artwork id: " + req.body.id + " is not valid!"
+         });
+     }
+
+    const artwork = {
+        id: req.body.id,
+        artwork_name: req.body.artwork_name,
+        artist_name: req.body.artist_name,
+        sizes: req.body.sizes,
+        location: req.body.location,
+        purchase_date: req.body.purchase_date,
+        purchase_location: req.body.purchase_location,
+        price: req.body.price,
+        tax_price: req.body.tax_price,
+        transport_price: req.body.transport_price,
+        framing: req.body.framing,
+        arr: req.body.arr,
+        artwork_desc: req.body.artwork_des,
+        notes: req.body.notes
+    }
+
+    Artwork.update(artwork, {
+        where: {
+            id: artwork.id
+        }
+    })
+        .then(response => {
+            res.status(200).send({
+                result: "SUCCESS",
+                payload: response
+            })
+        })
+        .catch(err => {
+            res.status(500).send({
+                result: "FAILED",
+                message: "An error occured!"
+            })
+        });
 };
 
 // TODO: Implementations

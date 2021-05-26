@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-
 import { slide as Menu } from 'react-burger-menu';
+import Moment from 'moment';
 
 const ArtworkDetail = (props) => {
 
@@ -35,6 +35,12 @@ const ArtworkDetail = (props) => {
             {showEditForm ? (
                 <form onSubmit={props.editSelectedArtwork}>
                     <p>Edit form</p>
+                    <input type="text"
+                        id="id"
+                        name="id"
+                        value={props.selectedArtwork.id ?? ""}
+                        readOnly
+                        hidden />
                 <div className="row mt-3">
                     <div className="col">
                         <label htmlFor="artwork_name">Artwork Name</label>

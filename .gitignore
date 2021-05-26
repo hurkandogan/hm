@@ -3,6 +3,7 @@ node_modules
 client/node_modules
 client/.pnp
 client/.pnp.js
+client/src/connection/common_http.js
 
 # testing
 /coverage
