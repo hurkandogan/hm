@@ -4,7 +4,7 @@ const Artwork = db.artwork;
 
 exports.createArtwork = (req, res) => {
 
-    if (!req.body.artworkName) {
+    if (!req.body.artwork_name) {
         res.status(400).send({
             result: "FAILED",
             message: "Name property cannot be empty."
