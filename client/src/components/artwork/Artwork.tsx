@@ -22,6 +22,7 @@ const Artwork = () => {
             .then(response => {
                 setArtworks(response.data.payload.rows);
                 setArtworkCount(response.data.payload.count);
+                console.log(response);
             })
             .catch(err => console.log(err));
         setLoading(false);
@@ -79,6 +80,11 @@ const Artwork = () => {
                             </button>
                         </div>
                     </div>
+                    {loading ? 
+                        <div className="spinner-border text-dark table-spinner" role="status">
+                            <span className="sr-only"></span>
+                        </div>
+                        :
                     <table className="table table-striped table-hover table-sm">
                         <thead>
                             <tr>
@@ -105,7 +111,7 @@ const Artwork = () => {
                             }
                         </tbody>
                     </table>
-                    
+                   }
                 </div>
             </div>
         </div>

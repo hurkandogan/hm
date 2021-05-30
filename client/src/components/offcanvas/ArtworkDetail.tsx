@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import Moment from 'moment';
+import { Selector } from 'react-redux';
 
 const ArtworkDetail = (props) => {
 
@@ -162,14 +163,16 @@ const ArtworkDetail = (props) => {
                     </div>
                     <div className="col">
                         <label htmlFor="arr">ARR</label>
-                        <input type="text"
-                            className="form-control"
+                        <select className="form-control"
                             name="arr"
                             id="arr"
                             placeholder="ARR"
                             autoComplete="off"
                                 value={props.selectedArtwork.arr ?? ""}
-                                onChange={props.editSelectedArtworkHandler} />
+                                onChange={props.editSelectedArtworkHandler}>
+                                <option value={0}>No</option>
+                                <option value={1}>Yes</option>
+                            </select>
                     </div>
                 </div>
                 <div className="row mt-3">

@@ -15,7 +15,7 @@ const InsertArtwork = (props) => {
         price: "",
         tax_price: "",
         transport_price: "",
-        arr: "",
+        arr: 0,
         framing: "",
         artwork_desc: "",
         notes:"",
@@ -150,7 +150,7 @@ const InsertArtwork = (props) => {
                             className="form-control"
                             name="transport_price"
                             id="transport_price"
-                            placeholder="Transport"
+                            placeholder="Transport Cost"
                             autoComplete="off"
                             value={artwork.transport_price}
                             onChange={changeHanler} />
@@ -163,21 +163,23 @@ const InsertArtwork = (props) => {
                             className="form-control"
                             name="framing"
                             id="framing"
-                            placeholder="Transport"
+                            placeholder="Framing Cost"
                             autoComplete="off"
                             value={artwork.framing}
                             onChange={changeHanler} />
                     </div>
                     <div className="col">
                         <label htmlFor="arr">ARR</label>
-                        <input type="text"
-                            className="form-control"
+                        <select className="form-control"
                             name="arr"
                             id="arr"
                             placeholder="ARR"
                             autoComplete="off"
                             value={artwork.arr}
-                            onChange={changeHanler} />
+                            onChange={changeHanler}>
+                            <option value={0}>No</option>
+                            <option value={1}>Yes</option>
+                        </select>
                     </div>
                 </div>
                 <div className="row mt-3">
