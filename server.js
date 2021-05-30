@@ -13,6 +13,19 @@ const app = express();
 // Cors
 app.use(cors());
 
+app.use(body.urlencoded({
+    extended: true
+}));
+app.use(body.json());
+
+// Routes
+require("./api/routes/auth")(app);
+require("./api/routes/index")(app);
+require('./api/routes/objects')(app);
+require("./api/routes/invoices")(app);
+require("./api/routes/costTypes")(app);
+require("./api/routes/artwork")(app);
+
 // Static Files
 const environment = process.env.NODE_ENV;
 if (environment === 'prod') {
@@ -25,17 +38,6 @@ if (environment === 'prod') {
 } else {
     console.log("Project is in development environment.");
 }
-
-app.use(body.urlencoded({extended: true}));
-app.use(body.json());
-
-// Routes
-require("./api/routes/auth")(app);
-require("./api/routes/index")(app);
-require('./api/routes/objects')(app);
-require("./api/routes/invoices")(app);
-require("./api/routes/costTypes")(app);
-require("./api/routes/artwork")(app);
 
 app.listen(PORT, function() {
     console.log("Server is alive on port: " + PORT);
