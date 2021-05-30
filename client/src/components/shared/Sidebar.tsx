@@ -56,7 +56,7 @@ const Sidebar = (props) => {
                                 <p>Artworks</p>
                             </NavLink>
                         </li>
-                        <li className="nav-header">House Management (In Progress)</li>
+                        <li className="nav-header">House Management (In Development)</li>
                         <li className="nav-item">
                             {/* <NavLink to={"/"} className="nav-link">
                                 <BsShield />
