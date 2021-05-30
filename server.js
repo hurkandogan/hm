@@ -11,10 +11,7 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 
 // Cors
-app.use(cors({
-    origin: 'http://localhost:3000',
-    credentials: true
-}));
+app.use(cors());
 
 // Static Files
 const environment = process.env.NODE_ENV;

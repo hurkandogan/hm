@@ -20,9 +20,9 @@ const Artwork = () => {
         setLoading(true);
         api.get('/api/artwork')
             .then(response => {
+                console.log(response);
                 setArtworks(response.data.payload.rows);
                 setArtworkCount(response.data.payload.count);
-                console.log(response);
             })
             .catch(err => console.log(err));
         setLoading(false);
