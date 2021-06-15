@@ -1,15 +1,9 @@
-import AuthService from './auth.service';
+export default function authHeader() {    
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
 
- const authHeader = async () =>  {    
-    
-    const user = await AuthService.getCurrentUser() || null;
-    
     if (user && user.accessToken) {
-        return { 'x-acess-token': user.accessToken };
+        return { 'x-access-token': user.accessToken };
     } else {
-        return {'x-acess-token': null};
+        return {};
     }
-
 };
-
-export default authHeader;

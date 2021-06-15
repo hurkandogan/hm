@@ -50,7 +50,7 @@ exports.selectArtworks = (req, res) => {
     //     limit,
     //     offset
     // } = pagination.getPagination(page, rowsPerPage);
-
+    console.log(req);
     Artwork.findAndCountAll({
         order: [
                 ['purchase_date', 'ASC'],

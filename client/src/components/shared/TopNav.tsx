@@ -1,12 +1,15 @@
 import React from 'react';
 import { FaBars } from 'react-icons/fa';
 import AuthService from '../../connection/auth.service';
+import { useHistory } from 'react-router-dom';
 
 const TopNav = () => {
+
+  const history = useHistory();
   
   const signout = () => {
     AuthService.signout();
-    window.location.reload();
+    history.push("/");
   }
 
     return (

@@ -10,6 +10,7 @@ module.exports = (app) => {
     });
 
     app.post('/api/signin', authController.signin);
+    
     app.post('/api/signup', authController.signup);
     app.get('/api/signout', authController.signout);
 };

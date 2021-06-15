@@ -4,18 +4,15 @@ const jwt = require("jsonwebtoken");
 const process = require("process");
 
 const verifyToken = (req, res, next) => {
-  let token = req.headers["x-access-token"];
+  let token = req.headers['x-access-token'];
 
-  if (!token) {
-    return res.status(403).send({
-      message: "No token provided!"
-    });
-  }
+  console.log(token);
 
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    console.log(err);
     if (err) {
       return res.status(401).send({
-        message: "Unauthorized!"
+        message: "Token is not valid! Unauthorized!"
       });
     }
     req.userId = decoded.id;
@@ -23,7 +20,8 @@ const verifyToken = (req, res, next) => {
   });
 };
 
-const isUser = (req, res, next) => {
+const isUser = (req, res) => {
+  console.log(req);
   User.findByPk(req.userId)
     .then(response => {
       if (response) {

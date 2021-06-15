@@ -1,12 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {
     BrowserRouter as Router,
     Switch,
     Route
 } from "react-router-dom";
 
-// Services
-import AuthService from "./connection/auth.service";
+import { PrivateRoute } from './components/auth/PrivateRoute';
 
 // Components
 import Login from "./components/auth/Login";
@@ -16,34 +15,25 @@ import Dashboard from "./components/content/Dashboard";
 import Artwork from "./components/artwork/Artwork";
 
 function App() {
-    const [currentUser, setCurrentUser] = useState({});
-    
-    useEffect(() => {
-        const user = AuthService.getCurrentUser();
-        if (user) {
-            setCurrentUser(user);
-        }
-    }, []);
-
     return (
         <Router>
-            {!currentUser.accessToken ? (
-                <Route exact path={'/'}>
-                    <Login />
-                </Route>
-            ) : (
             <div>
                 <TopNav />
-                <Sidebar userInfo={currentUser} />
-                
+                <Sidebar />
                 <div className="switch-wrapper">
                     <Switch>
-                        <Route exact path={"/"} component={Dashboard} />
-                        <Route path = {'/artwork'} component = {Artwork}/>
+                        <Route exact path={'/login'} component={Login} />
+                        
+                        <PrivateRoute exact path={"/"}>
+                            <Dashboard />    
+                        </PrivateRoute>
+
+                        <PrivateRoute path={'/artwork'}>
+                            <Artwork />
+                        </PrivateRoute>
                     </Switch>
                 </div> 
             </div> 
-            )}
         </Router>
     );
 }

@@ -1,10 +1,19 @@
 import React, { useState } from 'react';
 import AuthService from '../../connection/auth.service';
+import {
+    useHistory,
+    useLocation
+} from 'react-router-dom';
 
-const Login = () => {
+const Login = (props) => {
 
     const [loading, setLoading] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
+
+    const history = useHistory();
+    const location = useLocation();
+    //test
+    const from: any  = location.state || { from: { pathname: '/' } };
 
     const INITIAL_USER_DATA = {
         mail: "",
@@ -28,11 +37,16 @@ const Login = () => {
         setLoading(true);
         setButtonDisabled(true);
         await AuthService.signin(userData)
+            .then(() => {
+                //test
+                history.replace(from);
+        })
             .catch(error => console.log(error));
         setUserData(INITIAL_USER_DATA);
         setLoading(false);
         setButtonDisabled(false);
-        window.location.reload();
+        //test
+        history.push('/');
     }
 
     return (

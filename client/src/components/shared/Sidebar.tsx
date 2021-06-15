@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { NavLink } from 'react-router-dom';
 import {
     FaSearch,
@@ -11,8 +11,21 @@ import {
     BsHouseDoor
 } from 'react-icons/bs';
 import avatar from '../../sample_avatar.jpg';
+import AuthService from '../../connection/auth.service';
 
 const Sidebar = (props) => {
+
+    const [currentUser, setCurrentUser] = useState({
+        firstName: '',
+        lastName: '',
+    });
+
+    useEffect(() => {
+        const user = AuthService.getCurrentUser();
+        if (user.accessToken) {
+            setCurrentUser(user);
+        }
+    }, []);
 
     return (
         <aside className="main-sidebar sidebar-dark-primary elevation-4">
@@ -25,7 +38,7 @@ const Sidebar = (props) => {
                     <img src={avatar} alt="Avatar" className="img-circle elevation-2" />
             	</div> 
                     <div className="info">
-                        <p className="user-info">{props.userInfo.firstName + " " + props.userInfo.lastName}</p>
+                        <p className="user-info">{currentUser.firstName + " " + currentUser.lastName}</p>
                     </div>
                 </div>
 
