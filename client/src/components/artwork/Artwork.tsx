@@ -6,6 +6,7 @@ import {
     BsPlusSquare,
     BsCloudDownload
     } from 'react-icons/bs';
+import authService from '../../connection/auth.service';
 
 const Artwork = () => {
 
@@ -20,6 +21,10 @@ const Artwork = () => {
         setLoading(true);
         api.get('/api/artwork')
             .then(response => {
+                if (response.status === 401) {
+                    authService.signout();
+                    window.location.reload();
+                }
                 console.log(response);
                 setArtworks(response.data.payload.rows);
                 setArtworkCount(response.data.payload.count);
