@@ -10,6 +10,7 @@ const TopNav = () => {
   const signout = () => {
     AuthService.signout();
     history.push("/");
+    window.location.reload();
   }
 
     return (

@@ -47,6 +47,7 @@ const Login = (props) => {
         setButtonDisabled(false);
         //test
         history.push('/');
+        window.location.reload();
     }
 
     return (

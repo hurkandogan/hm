@@ -4,7 +4,6 @@ import authService from '../../connection/auth.service';
 
 export const PrivateRoute = ({ children, ...rest }) => {
     let user = authService.getCurrentUser();
-    console.log(user);
     return (
         <Route {...rest}
             render={({ location }) =>

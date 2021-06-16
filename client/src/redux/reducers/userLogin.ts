@@ -1,15 +1,15 @@
 const INITIAL_STATE = {
     isLoading: false,
-    objects: [],
+    loggedUser: {},
     msg: {}
 }
 export const reducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case 'GET_OBJECTS_START':
+        case 'USER_LOGIN_START':
             return { ...state, isLoading: true, message: '' };
-        case 'GET_OBJECTS_SUCCESS':
-            return { ...state, objects: action.payload, isLoading: false };
-        case 'GET_OBJECTS_ERROR':
+        case 'USER_LOGIN_SUCCESS':
+            return { ...state, loggedUser: action.payload, isLoading: false };
+        case 'USER_LOGIN_ERROR':
             return { ...state, msg: action.payload, isLoading: false };
         default: return state;
     }
