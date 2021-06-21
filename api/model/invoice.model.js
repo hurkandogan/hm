@@ -1,6 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const Object = require('./object.model');
-const CostType = require('./costTypes.model');
 
 module.exports = (sequelize) => {
     return sequelize.define('invoice',{

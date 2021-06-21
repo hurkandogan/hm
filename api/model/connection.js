@@ -1,5 +1,4 @@
 const Sequelize = require('sequelize');
-//const { connect } = require('../routes/auth');
 
 const dbName = process.env.DB_NAME;
 const dbUser = process.env.DB_USER;
@@ -32,16 +31,12 @@ db.sequelize = sequelize;
 
 db.users = require('./user.model')(sequelize);
 db.objects = require('./object.model')(sequelize);
-db.costTypes = require ('./costTypes.model')(sequelize);
 db.invoices = require('./invoice.model')(sequelize);
 db.artwork = require('./artwork.model')(sequelize);
 
 // Foreign Keys
 db.objects.hasMany(db.invoices,{ foreignKey: 'objectId' });
 db.invoices.belongsTo(db.objects, { foreignKey: 'objectId' });
-
-db.costTypes.hasMany(db.invoices, { foreignKey: 'costTypeId' });
-db.invoices.belongsTo(db.costTypes, { foreignKey: 'costTypeId' });
 
 // Connection Test
 const connectionTest = async () => {

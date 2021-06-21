@@ -1,4 +1,3 @@
-import { FaWindows } from 'react-icons/fa';
 import api from './common_http';
 
 const register = (firstName, lastName, mail, password) => {

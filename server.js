@@ -22,11 +22,13 @@ app.use(body.json());
 
 // Routes
 require("./api/routes/auth")(app);
-require("./api/routes/index")(app);
-require('./api/routes/objects')(app);
-require("./api/routes/invoices")(app);
-require("./api/routes/costTypes")(app);
+require("./api/routes/dashboard")(app);
 require("./api/routes/artwork")(app);
+
+//TODO:
+//require("./api/routes/objects")(app);
+//require("./api/routes/invoices")(app);
+
 
 // Static Files
 const environment = process.env.NODE_ENV;
@@ -34,7 +36,7 @@ if (environment === 'prod') {
     console.log("Project is in production environment.");
     const path = require('path');
     app.use(express.static(path.join(__dirname, 'client/build')));   
-    app.all('*', auth.verifyToken, (req, res) => {
+    app.all('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     });
 } else {

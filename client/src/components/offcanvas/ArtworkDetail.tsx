@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import Moment from 'moment';
-import { Selector } from 'react-redux';
 
 const ArtworkDetail = (props) => {
 
