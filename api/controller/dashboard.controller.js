@@ -4,4 +4,6 @@ const Op = Sequelize.Op;
 const Invoice = db.invoices;
 const Object = db.objects;
 
-exports.getAllTotals = (req, res) => {};
+exports.getAllTotals = (req, res) => {
+    console.log("Dashboard called");
+};
