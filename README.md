@@ -1,4 +1,4 @@
-<p>Project is developed to Spring Boot and this repository is not developing anymore.</p>
+<p>Project backend is switched to Spring Boot and this repository is not developed anymore.</p>
 
 <h1>House Management App</h1>
 <p>This is app is created for a House Management Firm to keep track of the expenses.</p>
